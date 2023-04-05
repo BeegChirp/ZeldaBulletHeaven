@@ -13,6 +13,7 @@ public class EnemyScript : MonoBehaviour
     public SpriteRenderer sprite;
     public float health = 10;
     public float iFrames = 10;
+    public float damage = 1;
 
     private void Awake()
     {
@@ -22,7 +23,8 @@ public class EnemyScript : MonoBehaviour
     // Start is called before the first frame update
     public void Start()
     {
-        target = GameObject.Find("Player").transform;
+        player = GameObject.FindGameObjectWithTag("Play Boi").GetComponent<PlayerScript>();
+        target = GameObject.FindGameObjectWithTag("Play Boi").transform;
     }
 
     // Update is called once per frame
@@ -54,6 +56,19 @@ public class EnemyScript : MonoBehaviour
         if (target)
         {
             rb.velocity = new Vector2(moveDirection.x, moveDirection.y) * moveSpeed;
+        }
+    }
+    public void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == 3 && player.iFrames <= 0)
+        {
+            logic.playerDamage(player.health, damage);
+            player.iFrames = 10;
+        }
+        if (collision.gameObject.layer == 6)
+        {
+            logic.dealDamage(health, player.weaponDamage);
+            iFrames = 10;
         }
     }
 }

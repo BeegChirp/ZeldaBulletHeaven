@@ -14,7 +14,7 @@ public class PlayerScript : MonoBehaviour
     public SpriteRenderer sprite;
     Vector2 moveDirection = Vector2.zero;
     public bool immune = false;
-    public float immunityFrames = 10;
+    public int iFrames = 0;
     public Animator animator;
 
     private void OnEnable()
@@ -57,21 +57,9 @@ public class PlayerScript : MonoBehaviour
             rb.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
         }
 
-        if(immune == true && immunityFrames > 0)
+        if(iFrames > 0)
         {
-            immunityFrames = immunityFrames - 1;
-        }
-        else if(immune == true && immunityFrames == 0)
-        {
-            immune = false;
-            immunityFrames = 10;
-        }
-    }
-    public void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.layer == 6 && immune == false)
-        {
-            logic.darknutDamage();
+            iFrames --;
         }
     }
 }

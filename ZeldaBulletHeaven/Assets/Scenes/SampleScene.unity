@@ -225,6 +225,7 @@ MonoBehaviour:
   sprite: {fileID: 24125218}
   health: 10
   iFrames: 10
+  damage: 1
 --- !u!212 &24125218
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -290,7 +291,51 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &205759814
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 205759816}
+  - component: {fileID: 205759815}
+  m_Layer: 0
+  m_Name: DataBase
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &205759815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 205759814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a9bff8114a604e4abd6b732f7dc7e40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &205759816
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 205759814}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -21.561567, y: -51.44, z: -56.090405}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &222029603
 GameObject:
@@ -338,7 +383,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &222029607
 MonoBehaviour:
@@ -381,7 +426,7 @@ GameObject:
   - component: {fileID: 366509402}
   - component: {fileID: 366509401}
   - component: {fileID: 366509403}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AutoAttack
   m_TagString: Auto
   m_Icon: {fileID: 0}
@@ -417,12 +462,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 366509400}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.004666666}
-  m_LocalScale: {x: 0.02222222, y: 0.02222222, z: 0.02222222}
+  m_LocalPosition: {x: 0, y: 0, z: 0.79}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1790533248}
-  m_RootOrder: 1
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &366509403
 SpriteRenderer:
@@ -578,6 +623,7 @@ MonoBehaviour:
   sprite: {fileID: 430094471}
   health: 10
   iFrames: 10
+  damage: 1
 --- !u!212 &430094471
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -643,7 +689,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
@@ -845,6 +891,7 @@ MonoBehaviour:
   sprite: {fileID: 725064470}
   health: 10
   iFrames: 10
+  damage: 1
 --- !u!212 &725064470
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -910,7 +957,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1094686721
 GameObject:
@@ -1014,6 +1061,7 @@ MonoBehaviour:
   sprite: {fileID: 1094686726}
   health: 10
   iFrames: 10
+  damage: 1
 --- !u!212 &1094686726
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1079,7 +1127,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1295970616
 GameObject:
@@ -1110,7 +1158,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04850a627240c924eb0145e301b07506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1790533250}
   gameOverScreen: {fileID: 1913792989}
   enemy: {fileID: 1788222584}
   attackRange: {x: 19, y: 27}
@@ -1131,7 +1178,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1308027254
 GameObject:
@@ -1315,6 +1362,7 @@ MonoBehaviour:
   sprite: {fileID: 1447521321}
   health: 10
   iFrames: 10
+  damage: 1
 --- !u!212 &1447521321
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1380,7 +1428,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1480644381
 GameObject:
@@ -1416,7 +1464,7 @@ RectTransform:
   - {fileID: 1308027257}
   - {fileID: 1913792990}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1748,7 +1796,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1788222580
 Rigidbody2D:
@@ -1831,6 +1879,7 @@ MonoBehaviour:
   sprite: {fileID: 1788222578}
   health: 10
   iFrames: 10
+  damage: 1
 --- !u!1 &1790533246
 GameObject:
   m_ObjectHideFlags: 0
@@ -1918,7 +1967,6 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1676300947}
-  - {fileID: 366509402}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1990,7 +2038,7 @@ MonoBehaviour:
   alive: 1
   sprite: {fileID: 1790533247}
   immune: 0
-  immunityFrames: 10
+  iFrames: 0
   animator: {fileID: 1790533254}
 --- !u!61 &1790533251
 BoxCollider2D:
@@ -2196,7 +2244,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2115562874
 GameObject:

@@ -52,12 +52,4 @@ public class SwordScript : MonoBehaviour
     {
         Gizmos.DrawWireCube(transform.position, logic.attackRange);
     }*/
-
-    public void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.layer == 6)
-        {
-            logic.dealDamage();
-        }
-    }
 }

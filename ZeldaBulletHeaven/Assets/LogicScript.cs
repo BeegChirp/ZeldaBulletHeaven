@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class LogicScript : MonoBehaviour
 {
     
-    public PlayerScript player;
+    //public PlayerScript player;
     public GameObject gameOverScreen;
     public EnemyScript enemy;
     public Vector2 attackRange = new Vector2(1,1);
@@ -19,10 +19,10 @@ public class LogicScript : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    public void darknutDamage()
+    public float playerDamage(float health, float damage)
     {
-        player.health --;
-        player.immune = true;
+        health = health - damage;
+        return health;
     }
 
     public void gameOver()
@@ -38,14 +38,10 @@ public class LogicScript : MonoBehaviour
         return rotation;
     }
 
-    public void dealDamage() //int iFrames)
+    public float dealDamage(float health, float weaponDamage) //int iFrames)
     {
-        //if(enemy.iFrames <= 0)
-        //{
-            enemy.health --;
-           // iFrames = 10;
-        //}
-        //return iFrames;
+        health = health - weaponDamage;
+        return health;
     }
 
     /*public int immunity(int iFrames)
@@ -57,3 +53,5 @@ public class LogicScript : MonoBehaviour
         return iFrames;
     }*/
 }
+
+
