@@ -13,9 +13,10 @@ public class PlayerScript : MonoBehaviour
     public bool alive = true;
     public SpriteRenderer sprite;
     Vector2 moveDirection = Vector2.zero;
-    public bool immune = false;
     public int iFrames = 0;
     public Animator animator;
+    public int[] weapon = { 0 };
+    public int level = 0;
 
     private void OnEnable()
     {
@@ -31,14 +32,14 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         moveDirection = playerMovement.ReadValue<Vector2>();
-        if(health <= 0)
+        if (health <= 0)
         {
             logic.gameOver();
             alive = false;
-            rb.velocity = new Vector2(0,0);
+            rb.velocity = new Vector2(0, 0);
         }
 
-        if (Input.mousePosition.x <= Screen.width/2 && alive == true)
+        if (Input.mousePosition.x <= Screen.width / 2 && alive == true)
         {
             sprite.flipX = true;
         }
@@ -57,9 +58,9 @@ public class PlayerScript : MonoBehaviour
             rb.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
         }
 
-        if(iFrames > 0)
+        if (iFrames > 0)
         {
-            iFrames --;
+            iFrames--;
         }
     }
 }

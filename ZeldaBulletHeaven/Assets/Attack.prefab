@@ -44,13 +44,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 5852463392333824919}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75c69a65da8ad424c8414c54536a4a2c, type: 3}
+  m_Script: {fileID: 11500000, guid: 1f973dcd4e6d1c241b03ca3c5ae72b5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerPos: {fileID: 0}
   logic: {fileID: 0}
   lifespan: 25
   auto: {fileID: 0}
+  aimAngle: 0
 --- !u!212 &5852463392333824914
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -10,6 +10,8 @@ public class LogicScript : MonoBehaviour
     //public PlayerScript player;
     public GameObject gameOverScreen;
     public EnemyScript enemy;
+    public DataBase data;
+    public PlayerScript player;
     public Vector2 attackRange = new Vector2(1,1);
     public LayerMask enemyLayers = 9;
     public float angle;
@@ -38,9 +40,9 @@ public class LogicScript : MonoBehaviour
         return rotation;
     }
 
-    public float dealDamage(float health, float weaponDamage) //int iFrames)
+    public float dealDamage(float health, int weapon) //int iFrames)
     {
-        health = health - weaponDamage;
+        health = health - data.Weapon[weapon, 0, player.level];
         return health;
     }
 

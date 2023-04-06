@@ -67,7 +67,7 @@ public class EnemyScript : MonoBehaviour
         }
         if (collision.gameObject.layer == 6)
         {
-            logic.dealDamage(health, player.weaponDamage);
+            logic.dealDamage(health, player.weapon[0]);
             iFrames = 10;
         }
     }

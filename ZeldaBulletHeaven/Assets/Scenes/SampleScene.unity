@@ -319,9 +319,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 205759814}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a9bff8114a604e4abd6b732f7dc7e40, type: 3}
+  m_Script: {fileID: 11500000, guid: 60497917110473b469b920b253310422, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponName:
+  - Sword
+  - Bow
+  - Boomerang
+  - Hammer
 --- !u!4 &205759816
 Transform:
   m_ObjectHideFlags: 0
@@ -1160,6 +1165,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameOverScreen: {fileID: 1913792989}
   enemy: {fileID: 1788222584}
+  data: {fileID: 0}
+  player: {fileID: 0}
   attackRange: {x: 19, y: 27}
   enemyLayers:
     serializedVersion: 2
@@ -2037,9 +2044,10 @@ MonoBehaviour:
   health: 500
   alive: 1
   sprite: {fileID: 1790533247}
-  immune: 0
   iFrames: 0
   animator: {fileID: 1790533254}
+  weapon: 00000000
+  level: 0
 --- !u!61 &1790533251
 BoxCollider2D:
   m_ObjectHideFlags: 0
