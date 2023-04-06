@@ -38,7 +38,7 @@ public class SwordScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(lifespan <= 0)
+        if (lifespan <= 0)
         {
             Destroy(gameObject);
         }

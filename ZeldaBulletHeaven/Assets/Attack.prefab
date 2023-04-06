@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5852463392333824914}
   - component: {fileID: 5852463392333824915}
   - component: {fileID: 4467186587104832441}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}

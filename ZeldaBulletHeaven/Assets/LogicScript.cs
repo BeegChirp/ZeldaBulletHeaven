@@ -6,25 +6,26 @@ using UnityEngine.SceneManagement;
 
 public class LogicScript : MonoBehaviour
 {
-    
+
     //public PlayerScript player;
     public GameObject gameOverScreen;
+    public Text Kills;
     public EnemyScript enemy;
     public DataBase data;
     public PlayerScript player;
-    public Vector2 attackRange = new Vector2(1,1);
+    public Vector2 attackRange = new Vector2(1, 1);
     public LayerMask enemyLayers = 9;
     public float angle;
+    public int killCount = 0;
 
     public void restartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    public float playerDamage(float health, float damage)
+    public void playerDamage(float damage)
     {
-        health = health - damage;
-        return health;
+        player.health = player.health - damage;
     }
 
     public void gameOver()
@@ -46,14 +47,12 @@ public class LogicScript : MonoBehaviour
         return health;
     }
 
-    /*public int immunity(int iFrames)
+    public void killCounter()
     {
-        if (iFrames > 0)
-        {
-            iFrames --;
-        }
-        return iFrames;
-    }*/
+        killCount++;
+        Kills.text = killCount.ToString();
+    }
+
 }
 
 

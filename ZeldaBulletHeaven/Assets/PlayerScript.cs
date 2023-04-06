@@ -10,12 +10,12 @@ public class PlayerScript : MonoBehaviour
     public LogicScript logic;
     public InputAction playerMovement;
     public float health = 10;
-    public bool alive = true;
     public SpriteRenderer sprite;
     Vector2 moveDirection = Vector2.zero;
     public int iFrames = 0;
     public Animator animator;
     public int[] weapon = { 0 };
+    public int[] itemLevels;
     public int level = 0;
 
     private void OnEnable()
@@ -35,23 +35,26 @@ public class PlayerScript : MonoBehaviour
         if (health <= 0)
         {
             logic.gameOver();
-            alive = false;
             rb.velocity = new Vector2(0, 0);
         }
+        else
+        {
+            if (Input.mousePosition.x <= Screen.width / 2)
+            {
+                sprite.flipX = true;
+            }
+            else if (Input.mousePosition.x > Screen.width / 2)
+            {
+                sprite.flipX = false;
+            }
+        }
 
-        if (Input.mousePosition.x <= Screen.width / 2 && alive == true)
-        {
-            sprite.flipX = true;
-        }
-        else if (Input.mousePosition.x > Screen.width / 2 && alive == true)
-        {
-            sprite.flipX = false;
-        }
     }
+
     private void FixedUpdate()
     {
 
-        if (alive == true)
+        if (health >= 0)
         {
             animator.SetFloat("SpeedX", moveDirection.x);
             animator.SetFloat("SpeedY", moveDirection.y);

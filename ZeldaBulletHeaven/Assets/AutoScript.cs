@@ -25,13 +25,13 @@ public class AutoScript : MonoBehaviour
         yVar = runRise.y * offsetScale;
         transform.position = new Vector3(playerPos.position.x, playerPos.position.y, -1);
         transform.rotation = logic.aim(transform.position);
-        
+
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(cooldown <= 0)
+        if (cooldown <= 0)
         {
             weaponOrigin = new Vector3(xVar, yVar, -1);
             Instantiate(attack, weaponOrigin, logic.aim(playerPos.position));
@@ -39,7 +39,7 @@ public class AutoScript : MonoBehaviour
         }
         else
         {
-            cooldown --;
+            cooldown--;
         }
     }
 }
