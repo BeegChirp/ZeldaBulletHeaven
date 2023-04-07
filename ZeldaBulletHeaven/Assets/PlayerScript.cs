@@ -58,7 +58,7 @@ public class PlayerScript : MonoBehaviour
         {
             animator.SetFloat("SpeedX", moveDirection.x);
             animator.SetFloat("SpeedY", moveDirection.y);
-            rb.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
+            rb.velocity = new Vector2(moveDirection.x * moveSpeed * Time.fixedDeltaTime, moveDirection.y * moveSpeed * Time.fixedDeltaTime);
         }
 
         if (iFrames > 0)

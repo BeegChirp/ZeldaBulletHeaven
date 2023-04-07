@@ -16,7 +16,7 @@ public class SwordScript : MonoBehaviour
         playerPos = GameObject.FindGameObjectWithTag("Play Boi").GetComponent<Transform>();
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
         auto = GameObject.FindGameObjectWithTag("Auto").GetComponent<AutoScript>();
-        transform.position = new Vector3(auto.weaponOrigin.x + playerPos.position.x, auto.weaponOrigin.y + playerPos.position.y, -1);
+        //transform.position = new Vector3(auto.weaponOrigin.x + playerPos.position.x, auto.weaponOrigin.y + playerPos.position.y, -1);
         transform.rotation = logic.aim(transform.position);
         aimAngle = logic.angle;
     }
@@ -24,7 +24,7 @@ public class SwordScript : MonoBehaviour
     private void Update()
     {
         //Debug.Log(aimAngle);
-        transform.position = new Vector3(auto.weaponOrigin.x + playerPos.position.x, auto.weaponOrigin.y + playerPos.position.y, -1);
+        transform.position = new Vector3(playerPos.position.x, playerPos.position.y, -1);
         /*Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(transform.position, logic.attackRange, aimAngle, logic.enemyLayers);
         
         foreach(Collider2D enemy in hitEnemies)
@@ -48,8 +48,14 @@ public class SwordScript : MonoBehaviour
         }
     }
 
-    /*private void OnDrawGizmosSelected()
+    /*private void OnTriggerEnter2D(Collider2D collision)
     {
-        Gizmos.DrawWireCube(transform.position, logic.attackRange);
+        Debug.Log("Hit " + collision.gameObject.name);
+        if (collision.gameObject.layer == 7)
+        {
+            EnemyScript enemy = collision.GetComponent<EnemyScript>();
+            enemy.health = logic.dealDamage(enemy.health, 0);
+            //iFrames = 10;
+        }
     }*/
 }

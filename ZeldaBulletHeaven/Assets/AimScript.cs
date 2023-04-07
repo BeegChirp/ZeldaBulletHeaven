@@ -9,5 +9,7 @@ public class AimScript : MonoBehaviour
     void Update()
     {
         transform.rotation = logic.aim(transform.position);
+        //transform.position = new Vector3(transform.positon.x, transform.position.y, -9);
+        //Debug.Log(Input.mousePosition);
     }
 }

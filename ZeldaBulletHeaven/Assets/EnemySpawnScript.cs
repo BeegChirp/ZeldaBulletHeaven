@@ -8,71 +8,35 @@ public class EnemySpawnScript : MonoBehaviour
     public Transform playerPos;
     public GameObject darknut;
     public int spawnTimer = 50;
+    public float offScreenX = 120;
+    public float offScreenY = 75;
     public int spawnDirection;
-    public Vector3 offScreenUp;
-    public Vector3 offScreenDown;
-    public Vector3 offScreenLeft;
-    public Vector3 offScreenRight;
-    void Update()
+    private Vector3[] offScreen = new Vector3[4];
+    /*offScreen[0] = new Vector3(0,0,0);
+    offScreen[1] = new Vector3(0,0,0);
+    offScreen[2] = new Vector3(0,0,0);
+    offScreen[3] = new Vector3(0,0,0);*/
+
+    private void Update()
     {
         transform.position = logic.followPlayer(0);
-        offScreenUp = new Vector3(playerPos.position.x + Random.Range(-120, 120), playerPos.position.y + 75, 0.7f);
-        offScreenDown = new Vector3(playerPos.position.x + Random.Range(-120,120), playerPos.position.y - 75, 0.7f);
-        offScreenLeft = new Vector3(playerPos.position.x - 120, playerPos.position.y + Random.Range(-75, 75), 0.7f);
-        offScreenRight = new Vector3(playerPos.position.x + 120, playerPos.position.y + Random.Range(-75, 75), 0.7f);
-        Debug.Log(offScreenUp + " " + offScreenDown + " " + offScreenLeft + " " + offScreenRight);
+        offScreen[0] = new Vector3(playerPos.position.x + Random.Range(-offScreenX, offScreenX), playerPos.position.y + offScreenY, 0.7f);
+        offScreen[1] = new Vector3(playerPos.position.x + Random.Range(-offScreenX, offScreenX), playerPos.position.y - offScreenY, 0.7f);
+        offScreen[2] = new Vector3(playerPos.position.x - offScreenX, playerPos.position.y + Random.Range(-offScreenY, offScreenY), 0.7f);
+        offScreen[3] = new Vector3(playerPos.position.x + offScreenX, playerPos.position.y + Random.Range(-offScreenY, offScreenY), 0.7f);
+        Debug.Log(offScreen[0] + " " + offScreen[1] + " " + offScreen[2] + " " + offScreen[3]);
     }
     private void FixedUpdate()
     {
-
-        spawnDirection = Random.Range(0, 4);
-        if (spawnDirection == 0)
+        if (spawnTimer <= 0)
         {
-            if (spawnTimer <= 0)
-            {
-                SpawnDarknut(offScreenUp);
-                spawnTimer = 50;
-            }
-            else
-            {
-                spawnTimer--;
-            }
-        }
-        else if (spawnDirection == 1)
-        {
-            if (spawnTimer <= 0)
-            {
-                SpawnDarknut(offScreenDown);
-                spawnTimer = 50;
-            }
-            else
-            {
-                spawnTimer--;
-            }
-        }
-        else if (spawnDirection == 2)
-        {
-            if (spawnTimer <= 0)
-            {
-                SpawnDarknut(offScreenLeft);
-                spawnTimer = 50;
-            }
-            else
-            {
-                spawnTimer--;
-            }
+            spawnDirection = Random.Range(0, 4);
+            SpawnDarknut(offScreen[spawnDirection]);
+            spawnTimer = 50;
         }
         else
         {
-            if (spawnTimer <= 0)
-            {
-                SpawnDarknut(offScreenRight);
-                spawnTimer = 50;
-            }
-            else
-            {
-                spawnTimer--;
-            }
+            spawnTimer--;
         }
     }
 

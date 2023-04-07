@@ -7,6 +7,7 @@ TagManager:
   - Logic
   - Play Boi
   - Auto
+  - Enemy
   layers:
   - Default
   - TransparentFX

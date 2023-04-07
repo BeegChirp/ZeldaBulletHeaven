@@ -12,7 +12,6 @@ public class EnemyScript : MonoBehaviour
     Vector2 moveDirection;
     public SpriteRenderer sprite;
     public float health = 25;
-    public float iFrames = 10;
     public float damage = 1;
 
     private void Awake()
@@ -57,24 +56,24 @@ public class EnemyScript : MonoBehaviour
     {
         if (target)
         {
-            rb.velocity = new Vector2(moveDirection.x, moveDirection.y) * moveSpeed;
-        }
-        if (iFrames > 0)
-        {
-            iFrames--;
+            rb.velocity = new Vector2(moveDirection.x, moveDirection.y) * moveSpeed * Time.fixedDeltaTime;
         }
     }
-    public void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.layer == 3 && player.iFrames <= 0)
         {
             logic.playerDamage(damage);
             player.iFrames = 10;
         }
-        if (collision.gameObject.layer == 7 && iFrames <= 0)
+ 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.layer == 7)
         {
-            health = logic.dealDamage(health, player.weapon[0]);
-            iFrames = 10;
+            health = logic.dealDamage(health, 0);
         }
     }
 }
