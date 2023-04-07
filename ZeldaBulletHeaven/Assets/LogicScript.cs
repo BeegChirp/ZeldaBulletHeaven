@@ -6,13 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class LogicScript : MonoBehaviour
 {
-
-    //public PlayerScript player;
     public GameObject gameOverScreen;
     public Text Kills;
     public EnemyScript enemy;
     public DataBase data;
     public PlayerScript player;
+    public Transform playerPos;
     public Vector2 attackRange = new Vector2(1, 1);
     public LayerMask enemyLayers = 9;
     public float angle;
@@ -51,6 +50,12 @@ public class LogicScript : MonoBehaviour
     {
         killCount++;
         Kills.text = killCount.ToString();
+    }
+
+    public Vector3 followPlayer(int zDim)
+    {
+        Vector3 target = new Vector3(playerPos.position.x, playerPos.position.y, zDim);
+        return target;
     }
 
 }

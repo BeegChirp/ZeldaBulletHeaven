@@ -25,6 +25,7 @@ public class EnemyScript : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Play Boi").GetComponent<PlayerScript>();
         target = GameObject.FindGameObjectWithTag("Play Boi").transform;
+        logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
     }
 
     // Update is called once per frame
