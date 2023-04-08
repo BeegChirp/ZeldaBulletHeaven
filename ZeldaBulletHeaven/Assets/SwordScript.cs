@@ -36,7 +36,7 @@ public class SwordScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (lifespan <= 0)
         {

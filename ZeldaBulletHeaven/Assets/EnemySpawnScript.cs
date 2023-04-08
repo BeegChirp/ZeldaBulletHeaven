@@ -24,7 +24,7 @@ public class EnemySpawnScript : MonoBehaviour
         offScreen[1] = new Vector3(playerPos.position.x + Random.Range(-offScreenX, offScreenX), playerPos.position.y - offScreenY, 0.7f);
         offScreen[2] = new Vector3(playerPos.position.x - offScreenX, playerPos.position.y + Random.Range(-offScreenY, offScreenY), 0.7f);
         offScreen[3] = new Vector3(playerPos.position.x + offScreenX, playerPos.position.y + Random.Range(-offScreenY, offScreenY), 0.7f);
-        Debug.Log(offScreen[0] + " " + offScreen[1] + " " + offScreen[2] + " " + offScreen[3]);
+        //Debug.Log(offScreen[0] + " " + offScreen[1] + " " + offScreen[2] + " " + offScreen[3]);
     }
     private void FixedUpdate()
     {

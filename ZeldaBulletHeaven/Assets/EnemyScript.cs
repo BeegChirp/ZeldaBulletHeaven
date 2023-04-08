@@ -5,15 +5,15 @@ using UnityEngine;
 public class EnemyScript : MonoBehaviour
 {
     [SerializeField] public float moveSpeed = 5f;
-    public LogicScript logic;
-    public PlayerScript player;
+    Vector2 moveDirection;
     Rigidbody2D rb;
     Transform target;
-    Vector2 moveDirection;
+    public LogicScript logic;
+    public PlayerScript player;
+    public GameObject XP;
     public SpriteRenderer sprite;
-    public float health = 25;
+    public float health = 1;
     public float damage = 1;
-
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -25,6 +25,7 @@ public class EnemyScript : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Play Boi").GetComponent<PlayerScript>();
         target = GameObject.FindGameObjectWithTag("Play Boi").transform;
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
+        //XP = GameObject.FindGameObjectWithTag("XP");
     }
 
     // Update is called once per frame
@@ -47,6 +48,7 @@ public class EnemyScript : MonoBehaviour
 
         if (health <= 0)
         {
+            Instantiate(XP, transform.position, Quaternion.identity);
             Destroy(gameObject);
             logic.killCounter();
         }

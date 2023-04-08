@@ -5,6 +5,7 @@ using UnityEngine;
 public class AutoScript : MonoBehaviour
 {
     public Transform playerPos;
+    public PlayerScript player;
     public LogicScript logic;
     public float haste = 100;
     public float cooldown = 100;
@@ -29,7 +30,7 @@ public class AutoScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (cooldown <= 0)
+        if (cooldown <= 0 && player.health > 0)
         {
             //weaponOrigin = new Vector3(xVar, yVar, -1);
             Instantiate(attack, transform.position, logic.aim(playerPos.position));

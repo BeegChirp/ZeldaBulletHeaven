@@ -17,7 +17,7 @@ public class PlayerScript : MonoBehaviour
     public int[] weapon = { 0 };
     public int[] itemLevels;
     public int level = 0;
-
+    public float pickupRange = .2f;
     private void OnEnable()
     {
         playerMovement.Enable();
@@ -28,7 +28,11 @@ public class PlayerScript : MonoBehaviour
         playerMovement.Disable();
     }
 
-    // Update is called once per frame
+    private void Start()
+    {
+        pickupRange = .2f;
+    }
+
     void Update()
     {
         moveDirection = playerMovement.ReadValue<Vector2>();
@@ -48,7 +52,6 @@ public class PlayerScript : MonoBehaviour
                 sprite.flipX = false;
             }
         }
-
     }
 
     private void FixedUpdate()
