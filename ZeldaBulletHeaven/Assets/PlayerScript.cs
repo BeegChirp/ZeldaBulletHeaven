@@ -6,18 +6,20 @@ using UnityEngine.InputSystem;
 public class PlayerScript : MonoBehaviour
 {
     public Rigidbody2D rb;
-    public float moveSpeed = 5;
     public LogicScript logic;
     public InputAction playerMovement;
-    public float health = 10;
     public SpriteRenderer sprite;
-    Vector2 moveDirection = Vector2.zero;
-    public int iFrames = 0;
     public Animator animator;
+    public int iFrames = 0;
     public int[] weapon = { 0 };
     public int[] itemLevels;
     public int level = 0;
+    public int xpProgress;
+    public int currentLevel;
+    public float moveSpeed = 5;
+    public float health = 10;
     public float pickupRange = .2f;
+    Vector2 moveDirection = Vector2.zero;
     private void OnEnable()
     {
         playerMovement.Enable();
