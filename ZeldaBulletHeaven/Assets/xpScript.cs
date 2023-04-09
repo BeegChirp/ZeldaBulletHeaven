@@ -48,7 +48,7 @@ public class xpScript : MonoBehaviour
     {
         if (collision.gameObject.layer == 3)
         {
-            //function to add xp to Player
+            player.xpProgress++;
             Destroy(gameObject);
         }
     }

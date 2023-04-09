@@ -24,6 +24,10 @@ public class AutoScript : MonoBehaviour
         yVar = runRise.y * offsetScale;*/
         transform.position = logic.followPlayer(-1);
         transform.rotation = logic.aim(transform.position);
+        if(haste <= 3)
+        {
+            haste = 3;
+        }
 
     }
 

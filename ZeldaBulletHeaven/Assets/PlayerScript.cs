@@ -2,23 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour
 {
     public Rigidbody2D rb;
     public LogicScript logic;
     public InputAction playerMovement;
+    public EnemySpawnScript spawner;
     public SpriteRenderer sprite;
+    public AutoScript auto;
     public Animator animator;
+    public Text hpDisplay;
+    public Text xpDisplay;
+    public Text levelCounter;
     public int iFrames = 0;
     public int[] weapon = { 0 };
     public int[] itemLevels;
     public int level = 0;
-    public int xpProgress;
-    public int currentLevel;
+    public int xpProgress = 0;
+    public float currentLevel = 0;
     public float moveSpeed = 5;
     public float health = 10;
     public float pickupRange = .2f;
+    int xpOverflow;
     Vector2 moveDirection = Vector2.zero;
     private void OnEnable()
     {
@@ -33,6 +41,7 @@ public class PlayerScript : MonoBehaviour
     private void Start()
     {
         pickupRange = .2f;
+        //levelCounter.text = "Level: " + currentLevel.ToString();
     }
 
     void Update()
@@ -54,6 +63,22 @@ public class PlayerScript : MonoBehaviour
                 sprite.flipX = false;
             }
         }
+        if(pickupRange >= .75f)
+        {
+            pickupRange = .75f;
+        }
+        if(xpProgress >= 10)
+        {
+            xpOverflow = xpProgress - 10;
+            currentLevel++;
+            auto.haste = auto.haste - currentLevel;
+            pickupRange = pickupRange + (currentLevel / 10);
+            spawner.scaledTimer = spawner.scaledTimer - currentLevel;
+            xpProgress = xpOverflow;
+            levelCounter.text = "Level: " + currentLevel.ToString();
+        }
+        hpDisplay.text = "Health: " + health.ToString();
+        xpDisplay.text = "XP: " + xpProgress.ToString();
     }
 
     private void FixedUpdate()

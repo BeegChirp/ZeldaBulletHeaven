@@ -5,17 +5,25 @@ using UnityEngine;
 public class EnemySpawnScript : MonoBehaviour
 {
     public LogicScript logic;
+    public PlayerScript player;
     public Transform playerPos;
     public GameObject darknut;
-    public int spawnTimer = 50;
+    public float spawnTimer = 50;
     public float offScreenX = 120;
     public float offScreenY = 75;
+    public float scaledTimer;
     public int spawnDirection;
     private Vector3[] offScreen = new Vector3[4];
     /*offScreen[0] = new Vector3(0,0,0);
     offScreen[1] = new Vector3(0,0,0);
     offScreen[2] = new Vector3(0,0,0);
     offScreen[3] = new Vector3(0,0,0);*/
+
+    private void Start()
+    {
+        spawnTimer = 50;
+        scaledTimer = 50;
+    }
 
     private void Update()
     {
@@ -28,11 +36,15 @@ public class EnemySpawnScript : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if(scaledTimer <= 5)
+        {
+            scaledTimer = 5;
+        }
         if (spawnTimer <= 0)
         {
             spawnDirection = Random.Range(0, 4);
             SpawnDarknut(offScreen[spawnDirection]);
-            spawnTimer = 50;
+            spawnTimer = scaledTimer;
         }
         else
         {

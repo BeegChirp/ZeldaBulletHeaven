@@ -49,7 +49,7 @@ public class LogicScript : MonoBehaviour
     public void killCounter()
     {
         killCount++;
-        Kills.text = killCount.ToString();
+        Kills.text = "Kills: " + killCount.ToString();
     }
 
     public Vector3 followPlayer(int zDim)
