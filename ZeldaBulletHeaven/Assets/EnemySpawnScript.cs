@@ -9,8 +9,8 @@ public class EnemySpawnScript : MonoBehaviour
     public Transform playerPos;
     public GameObject darknut;
     public float spawnTimer = 50;
-    public float offScreenX = 120;
-    public float offScreenY = 75;
+    public float offScreenX = 360;
+    public float offScreenY = 225;
     public float scaledTimer;
     public int spawnDirection;
     private Vector3[] offScreen = new Vector3[4];
@@ -19,10 +19,13 @@ public class EnemySpawnScript : MonoBehaviour
     offScreen[2] = new Vector3(0,0,0);
     offScreen[3] = new Vector3(0,0,0);*/
 
-    private void Start()
+
+    private void Awake()
     {
         spawnTimer = 50;
         scaledTimer = 50;
+        offScreenX = 45;
+        offScreenY = 25;
     }
 
     private void Update()
@@ -36,7 +39,7 @@ public class EnemySpawnScript : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if(scaledTimer <= 5)
+        if (scaledTimer <= 5)
         {
             scaledTimer = 5;
         }

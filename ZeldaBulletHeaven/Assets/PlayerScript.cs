@@ -23,7 +23,7 @@ public class PlayerScript : MonoBehaviour
     public int level = 0;
     public int xpProgress = 0;
     public float currentLevel = 0;
-    public float moveSpeed = 5;
+    public float moveSpeed = 100;
     public float health = 10;
     public float pickupRange = .2f;
     int xpOverflow;
@@ -40,7 +40,7 @@ public class PlayerScript : MonoBehaviour
 
     private void Start()
     {
-        pickupRange = .2f;
+        pickupRange = 3f;
         //levelCounter.text = "Level: " + currentLevel.ToString();
     }
 
@@ -63,16 +63,16 @@ public class PlayerScript : MonoBehaviour
                 sprite.flipX = false;
             }
         }
-        if(pickupRange >= .75f)
+        if (pickupRange >= 10f)
         {
-            pickupRange = .75f;
+            pickupRange = 10f;
         }
-        if(xpProgress >= 10)
+        if (xpProgress >= 10)
         {
             xpOverflow = xpProgress - 10;
             currentLevel++;
             auto.haste = auto.haste - currentLevel;
-            pickupRange = pickupRange + (currentLevel / 10);
+            pickupRange = pickupRange + (currentLevel /10);
             spawner.scaledTimer = spawner.scaledTimer - currentLevel;
             xpProgress = xpOverflow;
             levelCounter.text = "Level: " + currentLevel.ToString();

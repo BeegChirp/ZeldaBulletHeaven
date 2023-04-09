@@ -14,6 +14,7 @@ public class EnemyScript : MonoBehaviour
     public SpriteRenderer sprite;
     public float health = 1;
     public float damage = 1;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();

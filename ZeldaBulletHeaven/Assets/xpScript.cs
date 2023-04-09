@@ -9,7 +9,7 @@ public class xpScript : MonoBehaviour
     Vector2 playerXY;
     Vector2 xpXY;
     public bool pickedUp = false;
-    float moveSpeed = -50f;
+    float moveSpeed = -450f;
     Vector2 moveDirection;
     public Rigidbody2D rb;
     private void Awake()
@@ -25,7 +25,7 @@ public class xpScript : MonoBehaviour
     {
         playerXY = new Vector2(playerPos.position.x, playerPos.position.y);
         xpXY = new Vector2(transform.position.x, transform.position.y);
-        if(Vector2.Distance(playerXY, xpXY) <= player.pickupRange)
+        if (Vector2.Distance(playerXY, xpXY) <= player.pickupRange)
         {
             pickedUp = true;
         }
@@ -40,7 +40,11 @@ public class xpScript : MonoBehaviour
         if (pickedUp == true)
         {
             rb.velocity = new Vector2(moveDirection.x, moveDirection.y) * moveSpeed * Time.fixedDeltaTime;
-            moveSpeed = moveSpeed + 3f;
+            if (moveSpeed > 0)
+            {
+                moveSpeed = moveSpeed + (moveSpeed * 0.022f);
+            }
+            moveSpeed = moveSpeed + 20f;
         }
     }
 
