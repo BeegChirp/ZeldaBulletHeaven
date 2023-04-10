@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using TMPro;
 using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour
@@ -14,9 +15,8 @@ public class PlayerScript : MonoBehaviour
     public SpriteRenderer sprite;
     public AutoScript auto;
     public Animator animator;
-    public Text hpDisplay;
-    public Text xpDisplay;
-    public Text levelCounter;
+    public TextMeshProUGUI hpDisplay;
+    public TextMeshProUGUI levelCounter;
     public int iFrames = 0;
     public int[] weapon = { 0 };
     public int[] itemLevels;
@@ -78,7 +78,8 @@ public class PlayerScript : MonoBehaviour
             levelCounter.text = "Level: " + currentLevel.ToString();
         }
         hpDisplay.text = "Health: " + health.ToString();
-        xpDisplay.text = "XP: " + xpProgress.ToString();
+
+        //xpDisplay.text = "XP: " + xpProgress.ToString();
     }
 
     private void FixedUpdate()

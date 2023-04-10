@@ -106,7 +106,7 @@ MonoBehaviour:
   XP: {fileID: 2955744593201868133, guid: 2ce64a9932114e64096d8f7203ee4bd3, type: 3}
   sprite: {fileID: 1612682969096467175}
   health: 1
-  damage: 1
+  damage: 10
 --- !u!50 &1612682969096467169
 Rigidbody2D:
   serializedVersion: 4

@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using UnityEngine.SceneManagement;
 
 public class LogicScript : MonoBehaviour
 {
     public GameObject gameOverScreen;
-    public Text Kills;
+    public TextMeshProUGUI Kills;
     public EnemyScript enemy;
     public DataBase data;
     public PlayerScript player;
