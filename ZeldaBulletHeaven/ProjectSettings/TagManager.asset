@@ -9,6 +9,8 @@ TagManager:
   - Auto
   - Enemy
   - XP
+  - Data
+  - Damage Number
   layers:
   - Default
   - TransparentFX

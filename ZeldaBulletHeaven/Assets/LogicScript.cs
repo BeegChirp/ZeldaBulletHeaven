@@ -8,7 +8,9 @@ using UnityEngine.SceneManagement;
 public class LogicScript : MonoBehaviour
 {
     public GameObject gameOverScreen;
+    public GameObject damageNumber;
     public TextMeshProUGUI Kills;
+    public TextMeshProUGUI damageNumberText;
     public EnemyScript enemy;
     public DataBase data;
     public PlayerScript player;
@@ -41,9 +43,11 @@ public class LogicScript : MonoBehaviour
         return rotation;
     }
 
-    public float dealDamage(float health, int weapon) //int iFrames)
+    public float dealDamage(float health, int weapon, Vector3 enemyLocation) //int iFrames)
     {
         health = health - data.Weapon[weapon, 0, player.level];
+        Instantiate(damageNumber, enemyLocation, Quaternion.identity);
+        damageNumberText.text = Random.Range(1, 100).ToString();
         return health;
     }
 
