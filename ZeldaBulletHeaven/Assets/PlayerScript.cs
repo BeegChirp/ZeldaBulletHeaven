@@ -20,9 +20,8 @@ public class PlayerScript : MonoBehaviour
     public int iFrames = 0;
     public int[] weapon = { 0 };
     public int[] itemLevels;
-    public int level = 0;
     public int xpProgress = 0;
-    public float currentLevel = 0;
+    public int currentLevel = 0;
     public float moveSpeed = 100;
     public float health = 10;
     public float pickupRange = .2f;
@@ -72,7 +71,7 @@ public class PlayerScript : MonoBehaviour
             xpOverflow = xpProgress - 10;
             currentLevel++;
             auto.haste = auto.haste - currentLevel;
-            pickupRange = pickupRange + (currentLevel /10);
+            pickupRange = pickupRange + 1;
             spawner.scaledTimer = spawner.scaledTimer - currentLevel;
             xpProgress = xpOverflow;
             levelCounter.text = "Level: " + currentLevel.ToString();

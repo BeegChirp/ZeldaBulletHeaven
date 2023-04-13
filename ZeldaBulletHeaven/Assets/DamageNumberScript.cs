@@ -5,7 +5,14 @@ using TMPro;
 
 public class DamageNumberScript : MonoBehaviour
 {
-    int lifespan = 25;
+    public Rigidbody2D rb;
+    int lifespan = 37;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
     public void FixedUpdate()
     {
         if(lifespan <= 0)

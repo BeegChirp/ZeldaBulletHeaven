@@ -76,7 +76,7 @@ public class EnemyScript : MonoBehaviour
     {
         if(collision.gameObject.layer == 7)
         {
-            health = logic.dealDamage(health, 0, transform.position);
+            health = logic.dealDamage(health, 0, new Vector3(transform.position.x + 0.4f, transform.position.y + 2.2f, -4));
         }
     }
 }

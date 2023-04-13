@@ -10,7 +10,7 @@ public class LogicScript : MonoBehaviour
     public GameObject gameOverScreen;
     public GameObject damageNumber;
     public TextMeshProUGUI Kills;
-    public TextMeshProUGUI damageNumberText;
+    public TextMeshPro damageNumberText;
     public EnemyScript enemy;
     public DataBase data;
     public PlayerScript player;
@@ -19,6 +19,8 @@ public class LogicScript : MonoBehaviour
     public LayerMask enemyLayers = 9;
     public float angle;
     public int killCount = 0;
+    public float bounceForce = 9;
+    public float rightBounceForce = 9;
 
     public void restartGame()
     {
@@ -43,11 +45,10 @@ public class LogicScript : MonoBehaviour
         return rotation;
     }
 
-    public float dealDamage(float health, int weapon, Vector3 enemyLocation) //int iFrames)
+    public float dealDamage(float health, int weapon, Vector3 enemyLocation)
     {
-        health = health - data.Weapon[weapon, 0, player.level];
-        Instantiate(damageNumber, enemyLocation, Quaternion.identity);
-        damageNumberText.text = Random.Range(1, 100).ToString();
+        health = health - data.Weapon[weapon, 0, player.currentLevel];
+        spawnDamageNumber(weapon, enemyLocation); //get the damage ammount
         return health;
     }
 
@@ -61,6 +62,22 @@ public class LogicScript : MonoBehaviour
     {
         Vector3 target = new Vector3(playerPos.position.x, playerPos.position.y, zDim);
         return target;
+    }
+    
+    void spawnDamageNumber(int weapon, Vector3 enemyLocation)
+    {
+        damageNumberText.text = data.Weapon[weapon, 0, player.currentLevel].ToString();
+        GameObject damageNumberPrefab = Instantiate(damageNumber, enemyLocation, Quaternion.identity);
+        Rigidbody2D rb = damageNumberPrefab.GetComponent<Rigidbody2D>();
+        rb.AddForce(Vector2.up * bounceForce, ForceMode2D.Impulse);
+        if (enemyLocation.x - playerPos.position.x >= 0)
+        {
+            rb.AddForce(Vector2.right * rightBounceForce, ForceMode2D.Impulse);
+        }
+        else
+        {
+            rb.AddForce(Vector2.left * rightBounceForce, ForceMode2D.Impulse);
+        }
     }
 
 }

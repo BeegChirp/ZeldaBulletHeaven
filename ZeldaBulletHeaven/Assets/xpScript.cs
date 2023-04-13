@@ -47,13 +47,15 @@ public class xpScript : MonoBehaviour
             moveSpeed = moveSpeed + 20f;
         }
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == 3)
         {
+            if(moveSpeed > 0)
+            {
             player.xpProgress++;
             Destroy(gameObject);
+            }
         }
     }
 }
