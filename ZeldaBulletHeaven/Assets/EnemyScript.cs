@@ -20,7 +20,6 @@ public class EnemyScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    // Start is called before the first frame update
     public void Start()
     {
         player = GameObject.FindGameObjectWithTag("Play Boi").GetComponent<PlayerScript>();
@@ -29,7 +28,6 @@ public class EnemyScript : MonoBehaviour
         //XP = GameObject.FindGameObjectWithTag("XP");
     }
 
-    // Update is called once per frame
     public void Update()
     {
         if (target)
@@ -49,7 +47,7 @@ public class EnemyScript : MonoBehaviour
 
         if (health <= 0)
         {
-            Instantiate(XP, transform.position, Quaternion.identity);
+            Instantiate(XP, new Vector3 (transform.position.x, transform.position.y, 2), Quaternion.identity);
             Destroy(gameObject);
             logic.killCounter();
         }
@@ -61,6 +59,7 @@ public class EnemyScript : MonoBehaviour
         {
             rb.velocity = new Vector2(moveDirection.x, moveDirection.y) * moveSpeed * Time.fixedDeltaTime;
         }
+        transform.position = logic.zDepth(transform.position);
     }
     private void OnTriggerStay2D(Collider2D collision)
     {

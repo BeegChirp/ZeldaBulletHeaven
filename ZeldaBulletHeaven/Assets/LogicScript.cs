@@ -14,13 +14,17 @@ public class LogicScript : MonoBehaviour
     public EnemyScript enemy;
     public DataBase data;
     public PlayerScript player;
-    public Transform playerPos;
+    public Transform playerTransform;
     public Vector2 attackRange = new Vector2(1, 1);
     public LayerMask enemyLayers = 9;
     public float angle;
     public int killCount = 0;
     public float bounceForce = 9;
     public float rightBounceForce = 9;
+    float yTop = 25;
+    float yBot = -25; 
+    float zTop = 1;
+    float zBot = -1;
 
     public void restartGame()
     {
@@ -60,17 +64,17 @@ public class LogicScript : MonoBehaviour
 
     public Vector3 followPlayer(int zDim)
     {
-        Vector3 target = new Vector3(playerPos.position.x, playerPos.position.y, zDim);
+        Vector3 target = new Vector3(playerTransform.position.x, playerTransform.position.y, zDim);
         return target;
     }
-    
+
     void spawnDamageNumber(int weapon, Vector3 enemyLocation)
     {
         damageNumberText.text = data.Weapon[weapon, 0, player.currentLevel].ToString();
         GameObject damageNumberPrefab = Instantiate(damageNumber, enemyLocation, Quaternion.identity);
         Rigidbody2D rb = damageNumberPrefab.GetComponent<Rigidbody2D>();
         rb.AddForce(Vector2.up * bounceForce, ForceMode2D.Impulse);
-        if (enemyLocation.x - playerPos.position.x >= 0)
+        if (enemyLocation.x - playerTransform.position.x >= 0)
         {
             rb.AddForce(Vector2.right * rightBounceForce, ForceMode2D.Impulse);
         }
@@ -78,6 +82,14 @@ public class LogicScript : MonoBehaviour
         {
             rb.AddForce(Vector2.left * rightBounceForce, ForceMode2D.Impulse);
         }
+    }
+
+    public Vector3 zDepth(Vector3 pos)
+    {
+        float y = pos.y - playerTransform.position.y;
+        if (y > 25) y = 25;
+        if (y < -25) y = -25;
+        return new Vector3 (pos.x, pos.y, Mathf.Lerp(zBot, zTop, Mathf.InverseLerp(yBot, yTop, y)));
     }
 
 }
