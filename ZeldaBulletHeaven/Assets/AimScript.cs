@@ -5,11 +5,13 @@ using UnityEngine;
 public class AimScript : MonoBehaviour
 {
     public LogicScript logic;
+    public MenuScript menu;
 
     void Update()
     {
-        transform.rotation = logic.aim(transform.position);
-        //transform.position = new Vector3(transform.positon.x, transform.position.y, -9);
-        //Debug.Log(Input.mousePosition);
+        if (menu.pauseBool == false)
+        {
+            transform.rotation = logic.aim(transform.position);
+        }
     }
 }

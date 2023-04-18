@@ -14,6 +14,7 @@ public class PlayerScript : MonoBehaviour
     public EnemySpawnScript spawner;
     public SpriteRenderer sprite;
     public AutoScript auto;
+    public MenuScript menu;
     public Animator animator;
     public TextMeshProUGUI hpDisplay;
     public TextMeshProUGUI levelCounter;
@@ -51,7 +52,7 @@ public class PlayerScript : MonoBehaviour
             logic.gameOver();
             rb.velocity = new Vector2(0, 0);
         }
-        else
+        else if(menu.pauseBool == false)
         {
             if (Input.mousePosition.x <= Screen.width / 2)
             {
