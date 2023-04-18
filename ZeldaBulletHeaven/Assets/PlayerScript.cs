@@ -23,8 +23,9 @@ public class PlayerScript : MonoBehaviour
     public int[] itemLevels;
     public int xpProgress = 0;
     public int currentLevel = 0;
-    public float moveSpeed = 100;
+    public float moveSpeed = 15;
     public float health = 10;
+    public float maxHealth;
     public float pickupRange = .2f;
     int xpOverflow;
     Vector2 moveDirection = Vector2.zero;
@@ -75,7 +76,7 @@ public class PlayerScript : MonoBehaviour
             pickupRange = pickupRange + 1;
             spawner.scaledTimer = spawner.scaledTimer - currentLevel;
             xpProgress = xpOverflow;
-            levelCounter.text = "Level: " + currentLevel.ToString();
+            levelCounter.text = "Level: " + (currentLevel+1).ToString();
         }
         hpDisplay.text = "Health: " + health.ToString();
 
@@ -89,7 +90,7 @@ public class PlayerScript : MonoBehaviour
         {
             animator.SetFloat("SpeedX", moveDirection.x);
             animator.SetFloat("SpeedY", moveDirection.y);
-            rb.velocity = new Vector2(moveDirection.x * moveSpeed * Time.fixedDeltaTime, moveDirection.y * moveSpeed * Time.fixedDeltaTime);
+            rb.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
         }
 
         if (iFrames > 0)

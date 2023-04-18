@@ -51,8 +51,11 @@ public class LogicScript : MonoBehaviour
 
     public float dealDamage(float health, int weapon, Vector3 enemyLocation)
     {
-        health = health - data.Weapon[weapon, 0, player.currentLevel];
-        spawnDamageNumber(weapon, enemyLocation); //get the damage ammount
+        int damage = (int)Mathf.Round((data.Weapon[weapon, 0, player.currentLevel] + Random.Range(-2f, 2f)));
+        bool crit = Random.Range(0, 100) < 30;
+        if (crit) damage = (int)(Mathf.Round(damage*1.5f));
+        health = health - damage;
+        spawnDamageNumber(damage, enemyLocation); //get the damage ammount
         return health;
     }
 
@@ -68,9 +71,9 @@ public class LogicScript : MonoBehaviour
         return target;
     }
 
-    void spawnDamageNumber(int weapon, Vector3 enemyLocation)
+    void spawnDamageNumber(int damage, Vector3 enemyLocation)
     {
-        damageNumberText.text = data.Weapon[weapon, 0, player.currentLevel].ToString();
+        damageNumberText.text = damage.ToString();
         GameObject damageNumberPrefab = Instantiate(damageNumber, enemyLocation, Quaternion.identity);
         Rigidbody2D rb = damageNumberPrefab.GetComponent<Rigidbody2D>();
         rb.AddForce(Vector2.up * bounceForce, ForceMode2D.Impulse);

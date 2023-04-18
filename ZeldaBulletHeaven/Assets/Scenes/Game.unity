@@ -952,7 +952,7 @@ MonoBehaviour:
   logic: {fileID: 1295970617}
   player: {fileID: 1790533250}
   playerPos: {fileID: 1790533248}
-  darknut: {fileID: 1612682969096467172, guid: f0a7267e712adc640a8d395d696bd1de, type: 3}
+  darknut: {fileID: 4473817037242950499, guid: f0a7267e712adc640a8d395d696bd1de, type: 3}
   spawnTimer: 50
   offScreenX: 45
   offScreenY: 30
@@ -2389,7 +2389,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Level: 0'
+  m_text: 'Level: 1'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
@@ -3021,8 +3021,9 @@ MonoBehaviour:
   itemLevels: 
   xpProgress: 0
   currentLevel: 0
-  moveSpeed: 500
-  health: 500
+  moveSpeed: 11.5
+  health: 100
+  maxHealth: 100
   pickupRange: 0
 --- !u!61 &1790533251
 BoxCollider2D:

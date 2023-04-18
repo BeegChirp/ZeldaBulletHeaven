@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
-    [SerializeField] public float moveSpeed = 5f;
+    [SerializeField] private float moveSpeed = 8f;
     Vector2 moveDirection;
     Rigidbody2D rb;
     Transform target;
@@ -57,7 +57,7 @@ public class EnemyScript : MonoBehaviour
     {
         if (target)
         {
-            rb.velocity = new Vector2(moveDirection.x, moveDirection.y) * moveSpeed * Time.fixedDeltaTime;
+            rb.velocity = new Vector2(moveDirection.x, moveDirection.y) * moveSpeed;
         }
         transform.position = logic.zDepth(transform.position);
     }

@@ -10,7 +10,8 @@ public class xpScript : MonoBehaviour
     Vector2 playerXY;
     Vector2 xpXY;
     private bool pickedUp = false;
-    float moveSpeed = -450f;
+    float moveSpeed;
+    private Vector3 direction;
     Vector2 moveDirection;
     public Rigidbody2D rb;
     private void Awake()
@@ -22,6 +23,8 @@ public class xpScript : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Play Boi").GetComponent<PlayerScript>();
         playerPos = GameObject.FindGameObjectWithTag("Play Boi").GetComponent<Transform>();
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
+        moveSpeed = (player.moveSpeed * -1.4f);
+        direction = Vector3.zero;
     }
     void Update()
     {
@@ -30,10 +33,11 @@ public class xpScript : MonoBehaviour
         if (Vector2.Distance(playerXY, xpXY) <= player.pickupRange)
         {
             pickedUp = true;
+            direction = (playerPos.position - transform.position).normalized;
         }
         if (pickedUp)
         {
-            Vector3 direction = (playerPos.position - transform.position).normalized;
+            if(moveSpeed>0) direction = (playerPos.position - transform.position).normalized;
             moveDirection = direction;
         }
     }
@@ -42,12 +46,12 @@ public class xpScript : MonoBehaviour
         if (pickedUp)
         {
             //transform.position = new Vector3(transform.position.x, transform.position.y, 0);
-            rb.velocity = new Vector2(moveDirection.x, moveDirection.y) * moveSpeed * Time.fixedDeltaTime;
+            rb.velocity = new Vector2(moveDirection.x, moveDirection.y) * moveSpeed;
             if (moveSpeed > 0)
             {
                 moveSpeed += (moveSpeed * 0.022f);
             }
-            moveSpeed += 20f;
+            moveSpeed += player.moveSpeed*0.06f;
         }
         //else transform.position = logic.zDepth(transform.position);
     }

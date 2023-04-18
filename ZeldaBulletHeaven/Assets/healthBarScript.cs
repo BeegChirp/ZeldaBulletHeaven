@@ -9,10 +9,12 @@ public class healthBarScript : MonoBehaviour
     public Slider slider;
     void Awake()
     {
+        slider.maxValue = player.maxHealth;
         slider.value = player.health;
     }
     void Update()
     {
+        slider.maxValue = player.maxHealth;
         slider.value = player.health;
     }
 }
