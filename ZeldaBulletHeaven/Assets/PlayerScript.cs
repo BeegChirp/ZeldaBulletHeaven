@@ -41,6 +41,7 @@ public class PlayerScript : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1f;
         pickupRange = 3f;
         //levelCounter.text = "Level: " + currentLevel.ToString();
     }
@@ -53,7 +54,7 @@ public class PlayerScript : MonoBehaviour
             logic.gameOver();
             rb.velocity = new Vector2(0, 0);
         }
-        else if(menu.pauseBool == false)
+        else if(Time.timeScale == 1)
         {
             if (Input.mousePosition.x <= Screen.width / 2)
             {

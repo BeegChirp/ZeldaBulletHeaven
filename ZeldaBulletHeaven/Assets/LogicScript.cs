@@ -30,6 +30,10 @@ public class LogicScript : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+    public void restartTime()
+    {
+        Time.timeScale = 1f;
+    }
 
     public void playerDamage(float damage)
     {
@@ -39,6 +43,7 @@ public class LogicScript : MonoBehaviour
     public void gameOver()
     {
         gameOverScreen.SetActive(true);
+        Time.timeScale = 0f;
     }
 
     public Quaternion aim(Vector3 pos)

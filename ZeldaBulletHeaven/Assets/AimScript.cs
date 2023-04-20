@@ -9,7 +9,7 @@ public class AimScript : MonoBehaviour
 
     void Update()
     {
-        if (menu.pauseBool == false)
+        if (Time.timeScale == 1)
         {
             transform.rotation = logic.aim(transform.position);
         }
