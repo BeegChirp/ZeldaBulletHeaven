@@ -38,6 +38,7 @@ public class LogicScript : MonoBehaviour
     public void playerDamage(float damage)
     {
         player.health = player.health - damage;
+        spawnDamageNumber((int)damage, player.transform.position);
     }
 
     public void gameOver()
@@ -76,13 +77,13 @@ public class LogicScript : MonoBehaviour
         return target;
     }
 
-    void spawnDamageNumber(int damage, Vector3 enemyLocation)
+    void spawnDamageNumber(int damage, Vector3 location)
     {
         damageNumberText.text = damage.ToString();
-        GameObject damageNumberPrefab = Instantiate(damageNumber, enemyLocation, Quaternion.identity);
+        GameObject damageNumberPrefab = Instantiate(damageNumber, location, Quaternion.identity);
         Rigidbody2D rb = damageNumberPrefab.GetComponent<Rigidbody2D>();
         rb.AddForce(Vector2.up * bounceForce, ForceMode2D.Impulse);
-        if (enemyLocation.x - playerTransform.position.x >= 0)
+        if (location.x - playerTransform.position.x >= 0)
         {
             rb.AddForce(Vector2.right * rightBounceForce, ForceMode2D.Impulse);
         }
