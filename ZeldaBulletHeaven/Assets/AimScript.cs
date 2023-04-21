@@ -5,7 +5,6 @@ using UnityEngine;
 public class AimScript : MonoBehaviour
 {
     public LogicScript logic;
-    public MenuScript menu;
 
     void Update()
     {

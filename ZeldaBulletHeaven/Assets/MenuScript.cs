@@ -10,17 +10,13 @@ public class MenuScript : MonoBehaviour
     public bool pauseBool = false;
     public GameObject pauseMenuUI;
     public TextMeshProUGUI timerText;
-    private float secondsCount;
-    private int minuteCount;
-    private int hourCount;
     public GameObject levelUpScreen;
 
     private void Update()
     {
-        UpdateTimerUI();
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (pauseBool == true)
+            if (pauseBool)
             {
                 Resume();
             }
@@ -30,74 +26,9 @@ public class MenuScript : MonoBehaviour
             }
         }
     }
-    public void UpdateTimerUI()
-    {
-        secondsCount += Time.deltaTime;
-        while(secondsCount >= 60)
-        {
-            minuteCount++;
-            secondsCount = secondsCount - 60;
-        }
-        while(minuteCount >= 60)
-        {
-            hourCount++;
-            minuteCount = minuteCount - 60;
-        }
-        if (hourCount > 0)
-        {
-            if (secondsCount < 10)
-            {
-                if (minuteCount < 10)
-                {
-                    timerText.text = hourCount + ":0" + minuteCount + ":0" + (int)secondsCount;
-                }
-                else
-                {
-                    timerText.text = hourCount + ":" + minuteCount + ":0" + (int)secondsCount;
-                }
-            }
-            else
-            {
-                if (minuteCount < 10)
-                {
-                    timerText.text = hourCount + ":0" + minuteCount + ":" + (int)secondsCount;
-                }
-                else
-                {
-                    timerText.text = hourCount + ":" + minuteCount + ":" + (int)secondsCount;
-                }
-            }
-        }
-        else
-        {
-            if(secondsCount < 10)
-            {
-                if(minuteCount < 10)
-                {
-                    timerText.text = "0" + minuteCount + ":0" + (int)secondsCount;
-                }
-                else
-                {
-                    timerText.text = minuteCount + ":0" + (int)secondsCount;
-                }
-            }
-            else
-            {
-                if (minuteCount < 10)
-                {
-                    timerText.text = "0" + minuteCount + ":" + (int)secondsCount;
-                }
-                else
-                {
-                    timerText.text = minuteCount + ":" + (int)secondsCount;
-                }
-            }
-        }
-    }
 
     private void FixedUpdate()
     {
-        Debug.Log(Time.deltaTime);
     }
     public void Resume()
     {

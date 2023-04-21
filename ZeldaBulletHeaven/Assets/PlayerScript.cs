@@ -54,7 +54,7 @@ public class PlayerScript : MonoBehaviour
             logic.gameOver();
             rb.velocity = new Vector2(0, 0);
         }
-        else if(Time.timeScale == 1)
+        if(Time.timeScale == 1)
         {
             if (Input.mousePosition.x <= Screen.width / 2)
             {
@@ -65,7 +65,7 @@ public class PlayerScript : MonoBehaviour
                 sprite.flipX = false;
             }
         }
-        if (pickupRange >= 10f)
+        if (pickupRange > 10f)
         {
             pickupRange = 10f;
         }
@@ -88,7 +88,7 @@ public class PlayerScript : MonoBehaviour
     private void FixedUpdate()
     {
 
-        if (health >= 0)
+        if (health > 0)
         {
             animator.SetFloat("SpeedX", moveDirection.x);
             animator.SetFloat("SpeedY", moveDirection.y);
