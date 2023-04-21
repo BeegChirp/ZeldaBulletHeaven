@@ -78,6 +78,7 @@ public class PlayerScript : MonoBehaviour
             spawner.scaledTimer = spawner.scaledTimer - currentLevel;
             xpProgress = xpOverflow;
             levelCounter.text = "Level: " + (currentLevel+1).ToString();
+            menu.levelUp();
         }
         hpDisplay.text = "Health: " + health.ToString();
 
