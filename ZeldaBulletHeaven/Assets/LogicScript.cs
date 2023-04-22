@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class LogicScript : MonoBehaviour
 {
+    [SerializeField] private CanvasGroup gameOverCanvas;
+    [SerializeField] private CanvasGroup theStuff;
+    [SerializeField] private bool fadeIn = false;
     public GameObject gameOverScreen;
     public GameObject damageNumber;
     public TextMeshProUGUI Kills;
@@ -14,6 +17,7 @@ public class LogicScript : MonoBehaviour
     public EnemyScript enemy;
     public DataBase data;
     public PlayerScript player;
+    public MusicLoop music;
     public Transform playerTransform;
     public Vector2 attackRange = new Vector2(1, 1);
     public LayerMask enemyLayers = 9;
@@ -25,9 +29,10 @@ public class LogicScript : MonoBehaviour
     float yBot = -25; 
     float zTop = 1;
     float zBot = -1;
-
+    bool musicPlayed = false;
     public void restartGame()
     {
+        fadeIn = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     public void restartTime()
@@ -44,7 +49,7 @@ public class LogicScript : MonoBehaviour
     public void gameOver()
     {
         gameOverScreen.SetActive(true);
-        Time.timeScale = 0f;
+        fadeIn = true;
     }
 
     public Quaternion aim(Vector3 pos)
@@ -100,7 +105,36 @@ public class LogicScript : MonoBehaviour
         if (y < -25) y = -25;
         return new Vector3 (pos.x, pos.y, Mathf.Lerp(zBot, zTop, Mathf.InverseLerp(yBot, yTop, y)));
     }
-
+    public void Update()
+    {
+        if (fadeIn)
+        {
+            if(musicPlayed == false)
+            {
+                music.youDied();
+                musicPlayed = true;
+            }
+            if (gameOverCanvas.alpha < 1)
+            {
+                gameOverCanvas.alpha += Time.deltaTime;
+            }
+            else
+            {
+                if(theStuff.alpha < 1)
+                {
+                theStuff.alpha += (Time.deltaTime/2);
+                }
+                else
+                {
+                    Time.timeScale = 0f;
+                }
+            }
+        }
+        else
+        {
+            gameOverCanvas.alpha = 0;
+            theStuff.alpha = 0;
+            musicPlayed = false;
+        }
+    }
 }
-
-

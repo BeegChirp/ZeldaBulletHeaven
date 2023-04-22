@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
 public class TimerScript : MonoBehaviour
 {
     public TextMeshProUGUI timerText;
@@ -17,8 +16,6 @@ public class TimerScript : MonoBehaviour
         minuteCount = 0;
         hourCount = 0;
     }
-
-    // Update is called once per frame
     void Update()
     {
         UpdateTimerUI();

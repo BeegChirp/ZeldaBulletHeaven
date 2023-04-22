@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
-
 public class PlayerScript : MonoBehaviour
 {
     public Rigidbody2D rb;
@@ -33,19 +32,16 @@ public class PlayerScript : MonoBehaviour
     {
         playerMovement.Enable();
     }
-
     private void OnDisable()
     {
         playerMovement.Disable();
     }
-
     private void Start()
     {
         Time.timeScale = 1f;
         pickupRange = 3f;
         //levelCounter.text = "Level: " + currentLevel.ToString();
     }
-
     void Update()
     {
         moveDirection = playerMovement.ReadValue<Vector2>();
@@ -81,13 +77,9 @@ public class PlayerScript : MonoBehaviour
             menu.levelUp();
         }
         hpDisplay.text = "Health: " + health.ToString();
-
-        //xpDisplay.text = "XP: " + xpProgress.ToString();
     }
-
     private void FixedUpdate()
     {
-
         if (health > 0)
         {
             animator.SetFloat("SpeedX", moveDirection.x);
