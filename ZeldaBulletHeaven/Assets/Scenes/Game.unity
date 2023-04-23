@@ -515,6 +515,8 @@ MonoBehaviour:
   - Bow
   - Boomerang
   - Hammer
+  levelUpOptions: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  types: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!4 &205759816
 Transform:
   m_ObjectHideFlags: 0
@@ -978,6 +980,8 @@ GameObject:
   - component: {fileID: 358731532}
   - component: {fileID: 358731534}
   - component: {fileID: 358731533}
+  - component: {fileID: 358731535}
+  - component: {fileID: 358731536}
   m_Layer: 5
   m_Name: LevelUpMenu
   m_TagString: Untagged
@@ -1048,6 +1052,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 358731531}
   m_CullTransparentMesh: 1
+--- !u!225 &358731535
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 358731531}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &358731536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 358731531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ec8512b21a06e94b93b07f38637ac57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelUpScreen: {fileID: 358731531}
+  levelUpCanvasGroup: {fileID: 358731535}
+  data: {fileID: 205759815}
+  player: {fileID: 0}
 --- !u!1 &366509400
 GameObject:
   m_ObjectHideFlags: 0
@@ -1596,8 +1628,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1243654302}
-        m_TargetAssemblyTypeName: MenuScript, Assembly-CSharp
+      - m_Target: {fileID: 358731536}
+        m_TargetAssemblyTypeName: LevelUpScript, Assembly-CSharp
         m_MethodName: optionChosen
         m_Mode: 1
         m_Arguments:
@@ -1971,8 +2003,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1243654302}
-        m_TargetAssemblyTypeName: MenuScript, Assembly-CSharp
+      - m_Target: {fileID: 358731536}
+        m_TargetAssemblyTypeName: LevelUpScript, Assembly-CSharp
         m_MethodName: optionChosen
         m_Mode: 1
         m_Arguments:
@@ -2979,8 +3011,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1243654302}
-        m_TargetAssemblyTypeName: MenuScript, Assembly-CSharp
+      - m_Target: {fileID: 358731536}
+        m_TargetAssemblyTypeName: LevelUpScript, Assembly-CSharp
         m_MethodName: optionChosen
         m_Mode: 1
         m_Arguments:
@@ -3147,7 +3179,6 @@ MonoBehaviour:
   pauseBool: 0
   pauseMenuUI: {fileID: 11696681}
   timerText: {fileID: 348787154}
-  levelUpScreen: {fileID: 358731531}
 --- !u!1 &1295970616
 GameObject:
   m_ObjectHideFlags: 0
@@ -3941,8 +3972,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1243654302}
-        m_TargetAssemblyTypeName: MenuScript, Assembly-CSharp
+      - m_Target: {fileID: 358731536}
+        m_TargetAssemblyTypeName: LevelUpScript, Assembly-CSharp
         m_MethodName: optionChosen
         m_Mode: 1
         m_Arguments:
@@ -4454,6 +4485,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1790533252}
+  levelUpScreen: {fileID: 358731531}
   logic: {fileID: 1295970617}
   playerMovement:
     m_Name: Player Movement
@@ -4504,6 +4536,7 @@ MonoBehaviour:
       m_Action: Player Movement
       m_Flags: 8
     m_Flags: 0
+  bigUps: {fileID: 358731536}
   spawner: {fileID: 439896757}
   sprite: {fileID: 1790533247}
   auto: {fileID: 366509401}
@@ -4513,7 +4546,7 @@ MonoBehaviour:
   levelCounter: {fileID: 1497662660}
   iFrames: 0
   weapon: 00000000
-  itemLevels: 
+  acquiredStuff: 
   xpProgress: 0
   currentLevel: 0
   moveSpeed: 11.5

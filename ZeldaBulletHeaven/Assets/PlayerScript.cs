@@ -8,8 +8,10 @@ using UnityEngine.SceneManagement;
 public class PlayerScript : MonoBehaviour
 {
     public Rigidbody2D rb;
+    public GameObject levelUpScreen;
     public LogicScript logic;
     public InputAction playerMovement;
+    public LevelUpScript bigUps;
     public EnemySpawnScript spawner;
     public SpriteRenderer sprite;
     public AutoScript auto;
@@ -19,7 +21,7 @@ public class PlayerScript : MonoBehaviour
     public TextMeshProUGUI levelCounter;
     public int iFrames = 0;
     public int[] weapon = { 0 };
-    public int[] itemLevels;
+    public int[] acquiredStuff; //Type of weapon, item, or skill || Current level of each weapon, item, and skill that have been acquired in any given run.
     public int xpProgress = 0;
     public int currentLevel = 0;
     public float moveSpeed = 15;
@@ -69,12 +71,10 @@ public class PlayerScript : MonoBehaviour
         {
             xpOverflow = xpProgress - 10;
             currentLevel++;
-            auto.haste = auto.haste - currentLevel;
-            pickupRange = pickupRange + 1;
-            spawner.scaledTimer = spawner.scaledTimer - currentLevel;
             xpProgress = xpOverflow;
             levelCounter.text = "Level: " + (currentLevel+1).ToString();
-            menu.levelUp();
+            levelUpScreen.SetActive(true);
+            bigUps.levelUp();
         }
         hpDisplay.text = "Health: " + health.ToString();
     }

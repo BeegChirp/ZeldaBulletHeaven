@@ -10,7 +10,6 @@ public class MenuScript : MonoBehaviour
     public bool pauseBool = false;
     public GameObject pauseMenuUI;
     public TextMeshProUGUI timerText;
-    public GameObject levelUpScreen;
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -36,16 +35,6 @@ public class MenuScript : MonoBehaviour
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         pauseBool = true;
-    }
-    public void levelUp()
-    {
-        levelUpScreen.SetActive(true);
-        Time.timeScale = 0f;
-    }
-    public void optionChosen()
-    {
-        levelUpScreen.SetActive(false);
-        Time.timeScale = 1f;
     }
     public void PlayGame()
     {

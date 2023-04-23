@@ -6,6 +6,8 @@ public class DataBase : MonoBehaviour
 {
     public string[] weaponName = { "Sword", "Bow", "Boomerang", "Hammer" };
     public int[,,] Weapon;
+    public int[] levelUpOptions;
+    public int[] types = new int[55];
     //Weapons, Stats, Levels
     //damage, haste, size, speed, amount
     void Start()
