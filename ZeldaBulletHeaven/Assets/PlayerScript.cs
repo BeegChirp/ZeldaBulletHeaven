@@ -21,6 +21,7 @@ public class PlayerScript : MonoBehaviour
     public TextMeshProUGUI levelCounter;
     public int iFrames = 0;
     public int[] weapon = { 0 };
+    public string[] skillNames;
     public int[] acquiredStuff; //Type of weapon, item, or skill || Current level of each weapon, item, and skill that have been acquired in any given run.
     public int xpProgress = 0;
     public int currentLevel = 0;
@@ -40,6 +41,9 @@ public class PlayerScript : MonoBehaviour
     }
     private void Start()
     {
+        skillNames = new string[3] {
+            "Link Skill 1", "Link SKill 2", "Link Skill 3"
+        };
         Time.timeScale = 1f;
         pickupRange = 3f;
         for (int i = 1; i < acquiredStuff.Length; i++)
