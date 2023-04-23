@@ -4,25 +4,43 @@ using UnityEngine;
 
 public class DataBase : MonoBehaviour
 {
-    public string[] optionNames;
-    public int[,,] Weapon;
     public int[] levelUpOptions;
-    public int[] types = new int[51];
+    public float[,,] Weapon;
     //Weapons, Stats, Levels
     //damage, haste, size, speed, amount
+    public string[] weaponNames;
+    public int[] weaponWeights;
+    public string[] itemNames;
+    public int[] itemWeights;
+    public string[] statUpNames;
+    public int[] statUpWeights;
     void Start()
     {
-        Weapon = new int[2, 5, 7] {
+        Weapon = new float[2, 5, 7] {
                 { { 10, 10, 12, 12, 12, 15, 17 }, { 100, 100, 90, 90, 85, 80, 75 }, { 1, 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1, 1 } },
                 { { 8, 8, 8, 12, 12, 15, 15}, { 120, 120, 90, 90, 85, 80, 75}, { 1, 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 2, 2, 2, 3 } }
              };
-        optionNames = new string[51] {
-            "Sword", "Boomerang", "Bombchu", "Bow", "Hookshot", "Slingshot", "Hammer", "Spinner", "Ball & Chain", "Beetle", "Whip", "Bee Badge",
+        weaponNames = new string[21] {
+            "Sword", "Bow", "Boomerang", "Bombchu", "Hookshot", "Slingshot", "Hammer", "Spinner", "Ball & Chain", "Beetle", "Whip", "Bee Badge",
             "Fire Rod", "Ice Rod", "Sand Rod", "Lightning Rod", "Deku Leaf", "Ether Medallion", "Bombos Medallion", "Quake Medallion", "Ocarina of Time",
-            "Net", "Bunny Hood", "Lon Lon Milk", "Chateau Romani", "Blue Ring", "Power, Glove", "Iron Boots", "Fishing Rod", "Giant Wallet",
+            };
+        weaponWeights = new int[21]
+        {
+            3, 3, 4, 3, 2, 4, 2, 2, 3, 4, 3, 2,
+            3, 3, 2, 3, 3, 2, 2, 2, 1
+        };
+        itemNames = new string[20] {
+            "Net", "Bunny Hood", "Lon Lon Milk", "Chateau Romani", "Blue Ring", "Power Glove", "Iron Boots", "Fishing Rod", "Giant Wallet",
             "Magic Armor", "Lens of Truth", "Fairy", "Tornado Rod", "Pegasus Boots", "Mirror Shield", "Weapon Pouch", "Zora Flipper", "Roc's Feather", "Stamina Scroll", "Goddess Harp",
+        };
+        itemWeights = new int[20]
+        {
+            4, 3, 1, 1, 2, 3, 3, 4, 2,
+            3, 2, 2, 4, 3, 2, 1, 3, 2, 3, 1
+        };
+
+        statUpNames = new string[7] {
             "Health", "Attack", "Speed", "Critical", "Haste", "Pickup", "Luck",
-            "Skill 1", "Skill 2", "Skill 3"
         };
     }
 }
