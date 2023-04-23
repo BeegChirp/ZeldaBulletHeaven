@@ -42,6 +42,11 @@ public class PlayerScript : MonoBehaviour
     {
         Time.timeScale = 1f;
         pickupRange = 3f;
+        for (int i = 1; i < acquiredStuff.Length; i++)
+        {
+            acquiredStuff[i] = -1;
+        }
+        acquiredStuff[0] = 0;
         //levelCounter.text = "Level: " + currentLevel.ToString();
     }
     void Update()
