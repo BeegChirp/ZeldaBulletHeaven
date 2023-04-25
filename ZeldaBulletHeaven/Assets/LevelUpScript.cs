@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class LevelUpScript : MonoBehaviour
 {
@@ -8,10 +9,30 @@ public class LevelUpScript : MonoBehaviour
     public CanvasGroup levelUpCanvasGroup;
     public DataBase data;
     public PlayerScript player;
+    public TextMeshProUGUI button1Text;
+    public TextMeshProUGUI button2Text;
+    public TextMeshProUGUI button3Text;
+    public TextMeshProUGUI button4Text;
     int[] buttons = new int[4];
-    string[] buttonsDisplay;
-    private void Start()
+    string[] buttonsDisplay = new string[4];
+    public List<int> weaponWeightList = new List<int>();
+    public List<int> itemWeightList = new List<int>();
+    private void Awake()
     {
+        for (int a = 0; a < data.weaponNames.Length; a++)
+        {
+            for (int b = 0; b < data.weaponWeights[a]; b++)
+            {
+                weaponWeightList.Add(a);
+            }
+        }
+        for (int a = 0; a < data.itemNames.Length; a++)
+        {
+            for (int b = 0; b < data.itemWeights[a]; b++)
+            {
+                itemWeightList.Add(a);
+            }
+        }
         for (int x = 0; x < buttons.Length; x++)
         {
             buttons[x] = -1;
@@ -19,53 +40,92 @@ public class LevelUpScript : MonoBehaviour
     }
     public void levelUp()
     {
-        /*for (int i = 0; i < buttons.Length; i++)
+        for (int x = 0; x < buttons.Length; x++)
+        {
+            buttons[x] = -1;
+        }
+        for (int i = 0; i < buttons.Length; i++)
         {
             while (buttons[i] == -1)
             {
-                int randomOption = Random.Range(0,16);
+                int randomCategory = Random.Range(0, 4);
+                int randomOption;
+                int placeholder;
+                //THIS IS PROBABLY BAD
 
-                    //THIS IS PROBABLY BAD
+                if (randomCategory == 0)
+                {
+                    placeholder = Random.Range(0, weaponWeightList.Count);
+                    randomOption = weaponWeightList[placeholder];
+                    buttonsDisplay[i] = data.weaponNames[randomOption]; //weapon
+                    buttonText(i);
+                }
+                else if (randomCategory == 1)
+                {
+                    placeholder = Random.Range(0, itemWeightList.Count);
+                    randomOption = itemWeightList[placeholder];
+                    buttonsDisplay[i] = data.itemNames[randomOption]; //item
+                    buttonText(i);
+                    randomOption = randomOption + data.weaponWeights.Length;
 
-                if(randomOption <= 4)
-                {
-                    buttonsDisplay[i] = data.weaponNames[Random.Range(0, data.weaponNames.Length)]; //weapon
                 }
-                else if(randomOption <= 9)
+                else if (randomCategory == 2)
                 {
-                    buttonsDisplay[i] = data.itemNames[Random.Range(0, data.weaponNames.Length)]; //item
-                }
-                else if(randomOption <= 14)
-                {
-                    buttonsDisplay[i] = data.skillNames[Random.Range(0, data.weaponNames.Length)]; //skill
+                    randomOption = Random.Range(0, data.statUpNames.Length);
+                    buttonsDisplay[i] = data.statUpNames[randomOption]; //statUp
+                    buttonText(i);
+                    randomOption = randomOption + data.weaponWeights.Length + data.itemWeights.Length;
                 }
                 else
                 {
-                    buttonsDisplay[i] = data.statUpNames[Random.Range(0, data.weaponNames.Length)]; //statUp
+                    randomOption = Random.Range(0, player.skillNames.Length);
+                    buttonsDisplay[i] = player.skillNames[randomOption]; //skill
+                    buttonText(i);
+                    randomOption = randomOption + data.weaponWeights.Length + data.itemWeights.Length + data.statUpWeights.Length;
                 }
 
-                    //NEED TO FIND A WAY TO DETERMINE THE DIFFERENCE BETWEEN WEAPON X, ITEM X, SKILL X, AND STAT UP X
-
+                //NEED TO FIND A WAY TO DETERMINE THE DIFFERENCE BETWEEN WEAPON X, ITEM X, SKILL X, AND STAT UP X
                 if (i == 0 || randomOption != buttons[0] && randomOption != buttons[1] && randomOption != buttons[2])
                 {
-                    if (player.acquiredStuff[randomOption] < 6)
+                    Debug.Log(randomOption);
+                    buttons[i] = randomOption;
+                    /*if (player.acquiredStuff[randomCategory] < 6)
                     {
-                        if (player.acquiredStuff[randomOption] < 0 && rerolled == false)
+                        if (player.acquiredStuff[randomCategory] < 0 && rerolled == false)
                         {
-                            
+
                         }
-                    }
-                    else currentOptions.RemoveAt(randomOption);
+                    }*/
                 }
                 else
                 {
                     buttons[i] = -1;
                 }
             }
-        }*/
+        }
         levelUpCanvasGroup.alpha = 1;
         Time.timeScale = 0f;
     }
+    public void buttonText(int i)
+    {
+        if (i == 0)
+        {
+            button1Text.text = buttonsDisplay[i];
+        }
+        else if (i == 1)
+        {
+            button2Text.text = buttonsDisplay[i];
+        }
+        else if (i == 2)
+        {
+            button3Text.text = buttonsDisplay[i];
+        }
+        else
+        {
+            button4Text.text = buttonsDisplay[i];
+        }
+    }
+
     public void optionChosen()
     {
         levelUpCanvasGroup.alpha = 0;

@@ -8,6 +8,8 @@ public class DataBase : MonoBehaviour
     public float[,,] Weapon;
     //Weapons, Stats, Levels
     //damage, haste, size, speed, amount
+    public string[] names;
+    public int[] weights;
     public string[] weaponNames;
     public int[] weaponWeights;
     public string[] itemNames;
@@ -20,6 +22,25 @@ public class DataBase : MonoBehaviour
                 { { 10, 10, 12, 12, 12, 15, 17 }, { 100, 100, 90, 90, 85, 80, 75 }, { 1, 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1, 1 } },
                 { { 8, 8, 8, 12, 12, 15, 15}, { 120, 120, 90, 90, 85, 80, 75}, { 1, 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 2, 2, 2, 3 } }
              };
+
+        names = new string[51]
+        {
+            "Sword", "Bow", "Boomerang", "Bombchu", "Hookshot", "Slingshot", "Hammer", "Spinner", "Ball & Chain", "Beetle", "Whip", "Bee Badge",
+            "Fire Rod", "Ice Rod", "Sand Rod", "Lightning Rod", "Deku Leaf", "Ether Medallion", "Bombos Medallion", "Quake Medallion", "Ocarina of Time",
+            "Net", "Bunny Hood", "Lon Lon Milk", "Chateau Romani", "Blue Ring", "Power Glove", "Iron Boots", "Fishing Rod", "Giant Wallet",
+            "Magic Armor", "Lens of Truth", "Fairy", "Tornado Rod", "Pegasus Boots", "Mirror Shield", "Weapon Pouch", "Zora Flipper", "Roc's Feather", "Stamina Scroll", "Goddess Harp",
+            "Health", "Attack", "Speed", "Critical", "Haste", "Pickup", "Luck",
+            "Skill1", "Skill2", "Skill3",
+        };
+        weights = new int[51]
+        {
+            3, 3, 4, 3, 2, 4, 2, 2, 3, 4, 3, 2,
+            3, 3, 2, 3, 3, 2, 2, 2, 1,
+            4, 3, 1, 1, 2, 3, 3, 4, 2,
+            3, 2, 2, 4, 3, 2, 1, 3, 2, 3, 1,
+            1, 1, 1, 1, 1, 1, 1,
+            1, 1, 1
+        };
         weaponNames = new string[21] {
             "Sword", "Bow", "Boomerang", "Bombchu", "Hookshot", "Slingshot", "Hammer", "Spinner", "Ball & Chain", "Beetle", "Whip", "Bee Badge",
             "Fire Rod", "Ice Rod", "Sand Rod", "Lightning Rod", "Deku Leaf", "Ether Medallion", "Bombos Medallion", "Quake Medallion", "Ocarina of Time",
@@ -41,6 +62,10 @@ public class DataBase : MonoBehaviour
 
         statUpNames = new string[7] {
             "Health", "Attack", "Speed", "Critical", "Haste", "Pickup", "Luck",
+        };
+        statUpWeights = new int[7]
+        {
+            1,1,1,1,1,1,1
         };
     }
 }
