@@ -126,7 +126,80 @@ public class LevelUpScript : MonoBehaviour
         }
     }
 
-    public void optionChosen()
+    public void option1Chosen()
+    {
+        bool upgradeDone = false;
+        if(buttons[0] < data.weaponNames.Length)
+        {
+            for (int a = 0; a < (player.weaponInventory.Length); a++)
+            {
+                if(a < (player.weaponInventory.Length / 2))
+                {
+                    if(buttons[0] == player.weaponInventory[a, 0])
+                    {
+                        player.weaponInventory[a, 1]++;
+                        upgradeDone = true;
+                    }
+                }
+                else if(upgradeDone == false)
+                {
+                    if(player.weaponInventory[(a - (player.weaponInventory.Length / 2)), 0] == -1)
+                    {
+                        player.weaponInventory[(a - (player.weaponInventory.Length / 2)), 0] = buttons[0];
+                        player.weaponInventory[(a - (player.weaponInventory.Length / 2)), 1]++;
+                        upgradeDone = true;
+                    }
+                }
+            }
+        }
+        else if (buttons[0] < data.itemNames.Length)
+        {
+            for (int b = 0; b < (player.itemInventory.Length); b++)
+            {
+                if (b < (player.itemInventory.Length / 2))
+                {
+                    if (buttons[0] == player.itemInventory[b, 0])
+                    {
+                        player.itemInventory[b, 1]++;
+                        upgradeDone = true;
+                    }
+                }
+                else if (upgradeDone == false)
+                {
+                    if (player.itemInventory[(b - (player.itemInventory.Length / 2)), 0] == -1)
+                    {
+                        player.itemInventory[(b - (player.itemInventory.Length / 2)), 0] = buttons[0];
+                        player.itemInventory[(b - (player.itemInventory.Length / 2)), 1]++;
+                        upgradeDone = true;
+                    }
+                }
+            }
+        }
+        else if (buttons[0] < data.statUpNames.Length)
+        {
+
+        }
+        else 
+        {
+
+        }
+        levelUpCanvasGroup.alpha = 0;
+        levelUpScreen.SetActive(false);
+        Time.timeScale = 1f;
+    }
+    public void option2Chosen()
+    {
+        levelUpCanvasGroup.alpha = 0;
+        levelUpScreen.SetActive(false);
+        Time.timeScale = 1f;
+    }
+    public void option3Chosen()
+    {
+        levelUpCanvasGroup.alpha = 0;
+        levelUpScreen.SetActive(false);
+        Time.timeScale = 1f;
+    }
+    public void option4Chosen()
     {
         levelUpCanvasGroup.alpha = 0;
         levelUpScreen.SetActive(false);

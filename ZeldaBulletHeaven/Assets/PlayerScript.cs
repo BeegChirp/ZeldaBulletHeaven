@@ -21,14 +21,11 @@ public class PlayerScript : MonoBehaviour
     public TextMeshProUGUI levelCounter;
     public int iFrames = 0;
     public string[] skillNames;
-    public int[,] acquiredWeaponLevels;
-    public int[,] acquiredItemLevels;
+    public int[,] weaponInventory;
+    public int[,] itemInventory;
     public int xpProgress = 0;
     public int currentLevel = 0;
-    public float moveSpeed = 15;
-    public float health = 10;
-    public float maxHealth;
-    public float pickupRange = .2f;
+    public float health, maxHealth, attack, attackMult, moveSpeed, moveSpeedMult, criticalChance, criticalDamageMult, haste, pickupRange, luck;
     int xpOverflow;
     Vector2 moveDirection = Vector2.zero;
     private void OnEnable()
@@ -39,13 +36,31 @@ public class PlayerScript : MonoBehaviour
     {
         playerMovement.Disable();
     }
+    private void Awake()
+    {
+        maxHealth = 100;
+        health = maxHealth;
+        attackMult = 1;
+        attack = 1;
+        moveSpeed = 8.75f;
+        moveSpeedMult = 1;
+        pickupRange = 3f;
+
+        Time.timeScale = 1f;
+    }
     private void Start()
     {
+        weaponInventory = new int[6, 2]
+        {
+            {0, 0}, {-1, -1}, {-1, -1}, {-1, -1 }, {-1, -1 }, {-1, -1 }
+        };
+        itemInventory = new int[6, 2]
+        {
+            {-1, -1}, {-1, -1}, {-1, -1}, {-1, -1 }, {-1, -1 }, {-1, -1 }
+        };
         skillNames = new string[3] {
             "Link Skill 1", "Link Skill 2", "Link Skill 3"
-        };
-        Time.timeScale = 1f;
-        pickupRange = 3f;
+        };   
     }
     void Update()
     {

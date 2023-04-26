@@ -1638,7 +1638,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 358731536}
         m_TargetAssemblyTypeName: LevelUpScript, Assembly-CSharp
-        m_MethodName: optionChosen
+        m_MethodName: option4Chosen
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2013,7 +2013,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 358731536}
         m_TargetAssemblyTypeName: LevelUpScript, Assembly-CSharp
-        m_MethodName: optionChosen
+        m_MethodName: option2Chosen
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3021,7 +3021,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 358731536}
         m_TargetAssemblyTypeName: LevelUpScript, Assembly-CSharp
-        m_MethodName: optionChosen
+        m_MethodName: option3Chosen
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3982,7 +3982,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 358731536}
         m_TargetAssemblyTypeName: LevelUpScript, Assembly-CSharp
-        m_MethodName: optionChosen
+        m_MethodName: option1Chosen
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4556,10 +4556,17 @@ MonoBehaviour:
   skillNames: []
   xpProgress: 0
   currentLevel: 0
-  moveSpeed: 11.5
   health: 100
   maxHealth: 100
+  attack: 0
+  attackMult: 0
+  moveSpeed: 11.5
+  moveSpeedMult: 0
+  criticalChance: 0
+  criticalDamageMult: 0
+  haste: 0
   pickupRange: 0
+  luck: 0
 --- !u!61 &1790533251
 BoxCollider2D:
   m_ObjectHideFlags: 0

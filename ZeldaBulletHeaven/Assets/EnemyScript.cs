@@ -18,6 +18,7 @@ public class EnemyScript : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        moveSpeed = 2;
     }
 
     public void Start()
