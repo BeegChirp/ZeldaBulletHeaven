@@ -25,12 +25,12 @@ public class DataBase : MonoBehaviour
 
         names = new string[51]
         {
-            "Sword", "Bow", "Boomerang", "Bombchu", "Hookshot", "Slingshot", "Hammer", "Spinner", "Ball & Chain", "Beetle", "Whip", "Bee Badge",
-            "Fire Rod", "Ice Rod", "Sand Rod", "Lightning Rod", "Deku Leaf", "Ether Medallion", "Bombos Medallion", "Quake Medallion", "Ocarina of Time",
-            "Net", "Bunny Hood", "Lon Lon Milk", "Chateau Romani", "Blue Ring", "Power Glove", "Iron Boots", "Fishing Rod", "Giant Wallet",
-            "Magic Armor", "Lens of Truth", "Fairy", "Tornado Rod", "Pegasus Boots", "Mirror Shield", "Weapon Pouch", "Zora Flipper", "Roc's Feather", "Stamina Scroll", "Goddess Harp",
-            "Health", "Attack", "Speed", "Critical", "Haste", "Pickup", "Luck",
-            "Skill1", "Skill2", "Skill3",
+            "Sword", "Bow", "Boomerang", "Bombchu", "Hookshot", "Slingshot", "Hammer", "Spinner", "Ball & Chain", "Beetle", "Whip", "Bee Badge", //12
+            "Fire Rod", "Ice Rod", "Sand Rod", "Lightning Rod", "Deku Leaf", "Ether Medallion", "Bombos Medallion", "Quake Medallion", "Ocarina of Time", //9
+            "Net", "Bunny Hood", "Lon Lon Milk", "Chateau Romani", "Blue Ring", "Power Glove", "Iron Boots", "Fishing Rod", "Giant Wallet", //9
+            "Magic Armor", "Lens of Truth", "Fairy", "Tornado Rod", "Pegasus Boots", "Mirror Shield", "Weapon Pouch", "Zora Flipper", "Roc's Feather", "Stamina Scroll", "Goddess Harp", //11
+            "Health", "Attack", "Speed", "Critical", "Haste", "Pickup", "Luck", //7
+            "Skill1", "Skill2", "Skill3", //3
         };
         weights = new int[51]
         {

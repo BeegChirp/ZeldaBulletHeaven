@@ -51,7 +51,6 @@ public class LevelUpScript : MonoBehaviour
                 int randomCategory = Random.Range(0, 4);
                 int randomOption;
                 int placeholder;
-                //THIS IS PROBABLY BAD
 
                 if (randomCategory == 0)
                 {
@@ -126,39 +125,39 @@ public class LevelUpScript : MonoBehaviour
         }
     }
 
-    public void option1Chosen()
+    public void optionChosen(int i)
     {
         bool upgradeDone = false;
-        if(buttons[0] < data.weaponNames.Length)
+        if (buttons[i] < data.weaponNames.Length)
         {
             for (int a = 0; a < (player.weaponInventory.Length); a++)
             {
-                if(a < (player.weaponInventory.Length / 2))
+                if (a < (player.weaponInventory.Length / 2))
                 {
-                    if(buttons[0] == player.weaponInventory[a, 0])
+                    if (buttons[i] == player.weaponInventory[a, 0])
                     {
                         player.weaponInventory[a, 1]++;
                         upgradeDone = true;
                     }
                 }
-                else if(upgradeDone == false)
+                else if (upgradeDone == false)
                 {
-                    if(player.weaponInventory[(a - (player.weaponInventory.Length / 2)), 0] == -1)
+                    if (player.weaponInventory[(a - (player.weaponInventory.Length / 2)), 0] == -1)
                     {
-                        player.weaponInventory[(a - (player.weaponInventory.Length / 2)), 0] = buttons[0];
+                        player.weaponInventory[(a - (player.weaponInventory.Length / 2)), 0] = buttons[i];
                         player.weaponInventory[(a - (player.weaponInventory.Length / 2)), 1]++;
                         upgradeDone = true;
                     }
                 }
             }
         }
-        else if (buttons[0] < data.itemNames.Length)
+        else if (buttons[i] < data.itemNames.Length + data.weaponNames.Length)
         {
             for (int b = 0; b < (player.itemInventory.Length); b++)
             {
                 if (b < (player.itemInventory.Length / 2))
                 {
-                    if (buttons[0] == player.itemInventory[b, 0])
+                    if (buttons[i] == player.itemInventory[b, 0])
                     {
                         player.itemInventory[b, 1]++;
                         upgradeDone = true;
@@ -168,41 +167,51 @@ public class LevelUpScript : MonoBehaviour
                 {
                     if (player.itemInventory[(b - (player.itemInventory.Length / 2)), 0] == -1)
                     {
-                        player.itemInventory[(b - (player.itemInventory.Length / 2)), 0] = buttons[0];
+                        player.itemInventory[(b - (player.itemInventory.Length / 2)), 0] = buttons[i];
                         player.itemInventory[(b - (player.itemInventory.Length / 2)), 1]++;
                         upgradeDone = true;
                     }
                 }
             }
         }
-        else if (buttons[0] < data.statUpNames.Length)
+        else if (buttons[i] < data.statUpNames.Length + data.itemNames.Length + data.weaponNames.Length)
         {
-
+            //int stat = buttons[i] - data.itemNames.Length + data.weaponNames.Length;
+            if (buttons[i] == 41)
+            {
+                float healthUp = player.health / player.maxHealth;
+                player.maxHealth += 50;
+                player.health = healthUp * player.maxHealth;
+            }
+            if (buttons[i] == 42) player.attack++;
+            if (buttons[i] == 43) player.moveSpeed++;
+            if (buttons[i] == 44) player.criticalChance++;
+            if (buttons[i] == 45) player.haste++;
+            if (buttons[i] == 46) player.pickupRange++;
+            else player.luck++;
         }
-        else 
+        else
         {
-
+            player.skills[buttons[i] - (data.statUpNames.Length + data.itemNames.Length + data.weaponNames.Length)]++;
         }
         levelUpCanvasGroup.alpha = 0;
         levelUpScreen.SetActive(false);
         Time.timeScale = 1f;
+    }
+    public void option1Chosen()
+    {
+        optionChosen(0);
     }
     public void option2Chosen()
     {
-        levelUpCanvasGroup.alpha = 0;
-        levelUpScreen.SetActive(false);
-        Time.timeScale = 1f;
+        optionChosen(1);
     }
     public void option3Chosen()
     {
-        levelUpCanvasGroup.alpha = 0;
-        levelUpScreen.SetActive(false);
-        Time.timeScale = 1f;
+        optionChosen(2);
     }
     public void option4Chosen()
     {
-        levelUpCanvasGroup.alpha = 0;
-        levelUpScreen.SetActive(false);
-        Time.timeScale = 1f;
+        optionChosen(3);
     }
 }

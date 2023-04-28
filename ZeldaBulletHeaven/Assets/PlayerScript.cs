@@ -17,16 +17,14 @@ public class PlayerScript : MonoBehaviour
     public AutoScript auto;
     public MenuScript menu;
     public Animator animator;
-    public TextMeshProUGUI hpDisplay;
-    public TextMeshProUGUI levelCounter;
+    public TextMeshProUGUI hpDisplay, levelCounter;
     public int iFrames = 0;
     public string[] skillNames;
-    public int[,] weaponInventory;
-    public int[,] itemInventory;
-    public int xpProgress = 0;
-    public int currentLevel = 0;
+    public int[,] weaponInventory, itemInventory;
+    public int[] skills;
     public float health, maxHealth, attack, attackMult, moveSpeed, moveSpeedMult, criticalChance, criticalDamageMult, haste, pickupRange, luck;
-    int xpOverflow;
+    public int xpProgress, currentLevel;
+    private int xpOverflow;
     Vector2 moveDirection = Vector2.zero;
     private void OnEnable()
     {
@@ -44,8 +42,11 @@ public class PlayerScript : MonoBehaviour
         attack = 1;
         moveSpeed = 8.75f;
         moveSpeedMult = 1;
+        criticalChance = 10;
+        criticalDamageMult = 1.5f;
+        haste = 1;
         pickupRange = 3f;
-
+        luck = 0;
         Time.timeScale = 1f;
     }
     private void Start()
@@ -58,9 +59,13 @@ public class PlayerScript : MonoBehaviour
         {
             {-1, -1}, {-1, -1}, {-1, -1}, {-1, -1 }, {-1, -1 }, {-1, -1 }
         };
+        skills = new int[3] { 0, 0, 0 };
         skillNames = new string[3] {
             "Link Skill 1", "Link Skill 2", "Link Skill 3"
-        };   
+        };
+        currentLevel = 0;
+        xpProgress = 0;
+        xpOverflow = 0;
     }
     void Update()
     {
