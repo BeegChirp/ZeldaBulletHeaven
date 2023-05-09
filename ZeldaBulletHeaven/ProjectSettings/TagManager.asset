@@ -11,6 +11,7 @@ TagManager:
   - XP
   - Data
   - Damage Number
+  - Arrow
   layers:
   - Default
   - TransparentFX
@@ -21,8 +22,8 @@ TagManager:
   - Enemy
   - AutoAttack
   - XP
-  - 
-  - 
+  - Despawner
+  - Projectiles
   - 
   - 
   - 
