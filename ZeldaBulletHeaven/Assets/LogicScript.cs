@@ -26,7 +26,7 @@ public class LogicScript : MonoBehaviour
     public float bounceForce = 9;
     public float rightBounceForce = 9;
     float yTop = 25;
-    float yBot = -25; 
+    float yBot = -25;
     float zTop = 1;
     float zBot = -1;
     bool musicPlayed = false;
@@ -43,7 +43,7 @@ public class LogicScript : MonoBehaviour
     public void playerDamage(float damage)
     {
         player.health = player.health - damage;
-        spawnDamageNumber((int)damage, player.transform.position);
+        spawnDamageNumber((int)damage, player.transform.position, false);
     }
 
     public void gameOver()
@@ -64,9 +64,9 @@ public class LogicScript : MonoBehaviour
     {
         int damage = (int)Mathf.Round((data.Weapon[weapon, 0, player.currentLevel] + Random.Range(-2f, 2f)));
         bool crit = Random.Range(0, 100) < 30;
-        if (crit) damage = (int)(Mathf.Round(damage*1.5f));
+        if (crit) damage = (int)(Mathf.Round(damage * 1.5f));
         health = health - damage;
-        spawnDamageNumber(damage, enemyLocation); //get the damage ammount
+        spawnDamageNumber(damage, enemyLocation, crit); //get the damage ammount
         return health;
     }
 
@@ -82,9 +82,19 @@ public class LogicScript : MonoBehaviour
         return target;
     }
 
-    void spawnDamageNumber(int damage, Vector3 location)
+    void spawnDamageNumber(int damage, Vector3 location, bool crit)
     {
         damageNumberText.text = damage.ToString();
+        if (crit)
+        {
+            damageNumberText.color = new Color32(255, 187, 0, 255);
+            damageNumberText.fontStyle = FontStyles.Bold;
+        }
+        else
+        {
+            damageNumberText.color = new Color32(255, 255, 255, 255);
+            damageNumberText.fontStyle = FontStyles.Normal;
+        }
         GameObject damageNumberPrefab = Instantiate(damageNumber, location, Quaternion.identity);
         Rigidbody2D rb = damageNumberPrefab.GetComponent<Rigidbody2D>();
         rb.AddForce(Vector2.up * bounceForce, ForceMode2D.Impulse);
@@ -103,13 +113,13 @@ public class LogicScript : MonoBehaviour
         float y = pos.y - playerTransform.position.y;
         if (y > 25) y = 25;
         if (y < -25) y = -25;
-        return new Vector3 (pos.x, pos.y, Mathf.Lerp(zBot, zTop, Mathf.InverseLerp(yBot, yTop, y)));
+        return new Vector3(pos.x, pos.y, Mathf.Lerp(zBot, zTop, Mathf.InverseLerp(yBot, yTop, y)));
     }
     public void Update()
     {
         if (fadeIn)
         {
-            if(musicPlayed == false)
+            if (musicPlayed == false)
             {
                 music.youDied();
                 musicPlayed = true;
@@ -120,9 +130,9 @@ public class LogicScript : MonoBehaviour
             }
             else
             {
-                if(theStuff.alpha < 1)
+                if (theStuff.alpha < 1)
                 {
-                theStuff.alpha += (Time.deltaTime/2);
+                    theStuff.alpha += (Time.deltaTime / 2);
                 }
                 else
                 {
