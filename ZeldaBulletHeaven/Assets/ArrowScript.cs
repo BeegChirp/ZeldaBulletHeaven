@@ -9,7 +9,7 @@ public class ArrowScript : MonoBehaviour
     public AutoScript auto;
     public Rigidbody2D rb;
     public float aimAngle;
-    [SerializeField] float bulletForce = 20f;
+    [SerializeField] float bulletForce = 0.3f;
     public float lifespan = 25;
     // Start is called before the first frame update
     void Awake()
@@ -18,9 +18,11 @@ public class ArrowScript : MonoBehaviour
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
         auto = GameObject.FindGameObjectWithTag("Auto").GetComponent<AutoScript>();
         rb = GameObject.FindGameObjectWithTag("Arrow").GetComponent<Rigidbody2D>();
-        transform.rotation = logic.aim(transform.position);
-        aimAngle = logic.angle;
-        rb.AddForce(playerPos.right * bulletForce, ForceMode2D.Impulse);
+        //transform.rotation = logic.aim(transform.position);
+        //aimAngle = logic.angle;
+        Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        direction.Normalize();
+        rb.AddForce(direction * bulletForce, ForceMode2D.Impulse);
     }
     private void FixedUpdate()
     {
@@ -28,9 +30,6 @@ public class ArrowScript : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        else
-        {
-            lifespan--;
-        }
+        lifespan--;
     }
 }

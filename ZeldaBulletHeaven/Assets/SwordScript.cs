@@ -28,9 +28,6 @@ public class SwordScript : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        else
-        {
-            lifespan--;
-        }
+        lifespan--;
     }
 }
