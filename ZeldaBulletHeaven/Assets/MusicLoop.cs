@@ -14,7 +14,7 @@ public class MusicLoop : MonoBehaviour
         musicSource.PlayScheduled(AudioSettings.dspTime + musicStart.length);
     }
 
-    public void youDied()
+    public void YouDied()
     {
         musicSource.Stop();
         musicSource.PlayOneShot(youDiedSFX);

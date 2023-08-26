@@ -11,7 +11,7 @@ public class PlayerScript : MonoBehaviour
     public GameObject levelUpScreen;
     public LogicScript logic;
     public InputAction playerMovement;
-    public LevelUpScript bigUps;
+    public LevelUpScript lvlUp;
     public EnemySpawnScript spawner;
     public SpriteRenderer sprite;
     public AutoScript auto;
@@ -72,7 +72,7 @@ public class PlayerScript : MonoBehaviour
         moveDirection = playerMovement.ReadValue<Vector2>();
         if (health <= 0)
         {
-            logic.gameOver();
+            logic.GameOver();
             rb.velocity = new Vector2(0, 0);
         }
         if(Time.timeScale == 1)
@@ -97,7 +97,7 @@ public class PlayerScript : MonoBehaviour
             xpProgress = xpOverflow;
             levelCounter.text = "Level: " + (currentLevel+1).ToString();
             levelUpScreen.SetActive(true);
-            bigUps.levelUp();
+            lvlUp.LevelUp();
         }
         hpDisplay.text = "Health: " + health.ToString();
     }

@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
-
 public class LogicScript : MonoBehaviour
 {
     [SerializeField] private CanvasGroup gameOverCanvas;
@@ -25,64 +24,57 @@ public class LogicScript : MonoBehaviour
     public int killCount = 0;
     public float bounceForce = 9;
     public float rightBounceForce = 9;
-    float yTop = 25;
-    float yBot = -25;
-    float zTop = 1;
-    float zBot = -1;
+    readonly float yTop = 25;
+    readonly float yBot = -25;
+    readonly float zTop = 1;
+    readonly float zBot = -1;
     bool musicPlayed = false;
-    public void restartGame()
-    {
-        fadeIn = false;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-    public void restartTime()
-    {
-        Time.timeScale = 1f;
-    }
-
-    public void playerDamage(float damage)
-    {
-        player.health = player.health - damage;
-        spawnDamageNumber((int)damage, player.transform.position, false);
-    }
-
-    public void gameOver()
-    {
-        gameOverScreen.SetActive(true);
-        fadeIn = true;
-    }
-
-    public Quaternion aim(Vector3 pos)
+    public Quaternion Aim(Vector3 pos)
     {
         Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - pos;
         angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         return rotation;
     }
-
-    public float dealDamage(float health, int weapon, Vector3 enemyLocation)
+    public float DealDamage(float health, int weapon, Vector3 enemyLocation)
     {
         int damage = (int)Mathf.Round((data.Weapon[weapon, 0, player.currentLevel] + Random.Range(-2f, 2f)));
         bool crit = Random.Range(0, 100) < 30;
         if (crit) damage = (int)(Mathf.Round(damage * 1.5f));
-        health = health - damage;
-        spawnDamageNumber(damage, enemyLocation, crit); //get the damage ammount
+        health -= damage;
+        SpawnDamageNumber(damage, enemyLocation, crit); //get the damage ammount
         return health;
     }
-
-    public void killCounter()
-    {
-        killCount++;
-        Kills.text = "Kills: " + killCount.ToString();
-    }
-
-    public Vector3 followPlayer(int zDim)
+    public Vector3 FollowPlayer(int zDim)
     {
         Vector3 target = new Vector3(playerTransform.position.x, playerTransform.position.y, zDim);
         return target;
     }
-
-    void spawnDamageNumber(int damage, Vector3 location, bool crit)
+    public void GameOver()
+    {
+        gameOverScreen.SetActive(true);
+        fadeIn = true;
+    }
+    public void KillCounter()
+    {
+        killCount++;
+        Kills.text = "Kills: " + killCount.ToString();
+    }
+    public void PlayerDamage(float damage)
+    {
+        player.health = player.health - damage;
+        SpawnDamageNumber((int)damage, player.transform.position, false);
+    }
+    public void RestartGame()
+    {
+        fadeIn = false;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    public void RestartTime()
+    {
+        Time.timeScale = 1f;
+    }
+    void SpawnDamageNumber(int damage, Vector3 location, bool crit)
     {
         damageNumberText.text = damage.ToString();
         if (crit)
@@ -107,8 +99,7 @@ public class LogicScript : MonoBehaviour
             rb.AddForce(Vector2.left * rightBounceForce, ForceMode2D.Impulse);
         }
     }
-
-    public Vector3 zDepth(Vector3 pos)
+    public Vector3 ZDepth(Vector3 pos)
     {
         float y = pos.y - playerTransform.position.y;
         if (y > 25) y = 25;
@@ -121,7 +112,7 @@ public class LogicScript : MonoBehaviour
         {
             if (musicPlayed == false)
             {
-                music.youDied();
+                music.YouDied();
                 musicPlayed = true;
             }
             if (gameOverCanvas.alpha < 1)

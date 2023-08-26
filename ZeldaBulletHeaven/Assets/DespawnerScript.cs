@@ -9,7 +9,7 @@ public class DespawnerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        logic.followPlayer(-5);
+        logic.FollowPlayer(-5);
         
     }
     private void OnTriggerEnter2D(Collider2D collision)

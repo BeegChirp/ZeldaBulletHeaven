@@ -18,8 +18,6 @@ public class EnemySpawnScript : MonoBehaviour
     offScreen[1] = new Vector3(0,0,0);
     offScreen[2] = new Vector3(0,0,0);
     offScreen[3] = new Vector3(0,0,0);*/
-
-
     private void Awake()
     {
         spawnTimer = 50;
@@ -27,10 +25,9 @@ public class EnemySpawnScript : MonoBehaviour
         offScreenX = 45;
         offScreenY = 25;
     }
-
     private void Update()
     {
-        transform.position = logic.followPlayer(0);
+        transform.position = logic.FollowPlayer(0);
         offScreen[0] = new Vector3(playerPos.position.x + Random.Range(-offScreenX, offScreenX), playerPos.position.y + offScreenY, 0.7f);
         offScreen[1] = new Vector3(playerPos.position.x + Random.Range(-offScreenX, offScreenX), playerPos.position.y - offScreenY, 0.7f);
         offScreen[2] = new Vector3(playerPos.position.x - offScreenX, playerPos.position.y + Random.Range(-offScreenY, offScreenY), 0.7f);
@@ -54,7 +51,6 @@ public class EnemySpawnScript : MonoBehaviour
             spawnTimer--;
         }
     }
-
     public void SpawnDarknut(Vector3 spawnPos)
     {
         Instantiate(darknut, spawnPos, Quaternion.identity);

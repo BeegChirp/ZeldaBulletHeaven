@@ -9,16 +9,17 @@ public class MenuScript : MonoBehaviour
 {
     public bool pauseBool = false;
     public GameObject pauseMenuUI;
+    public GameObject levelUpScreen;
     public TextMeshProUGUI timerText;
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (pauseBool)
+            if (pauseBool && levelUpScreen.activeSelf == false)
             {
                 Resume();
             }
-            else
+            else if (levelUpScreen.activeSelf == false)
             {
                 Pause();
             }

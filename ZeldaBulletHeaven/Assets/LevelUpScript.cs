@@ -38,7 +38,11 @@ public class LevelUpScript : MonoBehaviour
             buttons[x] = -1;
         }
     }
-    public void levelUp()
+    private void Update()
+    {
+        //Time.timeScale = 0f;
+    }
+    public void LevelUp()
     {
         for (int x = 0; x < buttons.Length; x++)
         {
@@ -50,21 +54,21 @@ public class LevelUpScript : MonoBehaviour
             {
                 int randomCategory = Random.Range(0, 4);
                 int randomOption;
-                int placeholder;
+                int weightedRoll;
 
                 if (randomCategory == 0)
                 {
-                    placeholder = Random.Range(0, weaponWeightList.Count);
-                    randomOption = weaponWeightList[placeholder];
+                    weightedRoll = Random.Range(0, weaponWeightList.Count);
+                    randomOption = weaponWeightList[weightedRoll];
                     buttonsDisplay[i] = data.weaponNames[randomOption]; //weapon
-                    buttonText(i);
+                    ButtonText(i);
                 }
                 else if (randomCategory == 1)
                 {
-                    placeholder = Random.Range(0, itemWeightList.Count);
-                    randomOption = itemWeightList[placeholder];
+                    weightedRoll = Random.Range(0, itemWeightList.Count);
+                    randomOption = itemWeightList[weightedRoll];
                     buttonsDisplay[i] = data.itemNames[randomOption]; //item
-                    buttonText(i);
+                    ButtonText(i);
                     randomOption = randomOption + data.weaponWeights.Length;
 
                 }
@@ -72,14 +76,14 @@ public class LevelUpScript : MonoBehaviour
                 {
                     randomOption = Random.Range(0, data.statUpNames.Length);
                     buttonsDisplay[i] = data.statUpNames[randomOption]; //statUp
-                    buttonText(i);
+                    ButtonText(i);
                     randomOption = randomOption + data.weaponWeights.Length + data.itemWeights.Length;
                 }
                 else
                 {
                     randomOption = Random.Range(0, player.skillNames.Length);
                     buttonsDisplay[i] = player.skillNames[randomOption]; //skill
-                    buttonText(i);
+                    ButtonText(i);
                     randomOption = randomOption + data.weaponWeights.Length + data.itemWeights.Length + data.statUpWeights.Length;
                 }
 
@@ -105,7 +109,7 @@ public class LevelUpScript : MonoBehaviour
         levelUpCanvasGroup.alpha = 1;
         Time.timeScale = 0f;
     }
-    public void buttonText(int i)
+    public void ButtonText(int i)
     {
         if (i == 0)
         {
@@ -124,8 +128,7 @@ public class LevelUpScript : MonoBehaviour
             button4Text.text = buttonsDisplay[i];
         }
     }
-
-    public void optionChosen(int i)
+    public void OptionChosen(int i)
     {
         bool upgradeDone = false;
         if (buttons[i] < data.weaponNames.Length)
@@ -198,20 +201,20 @@ public class LevelUpScript : MonoBehaviour
         levelUpScreen.SetActive(false);
         Time.timeScale = 1f;
     }
-    public void option1Chosen()
+    public void Option1Chosen()
     {
-        optionChosen(0);
+        OptionChosen(0);
     }
-    public void option2Chosen()
+    public void Option2Chosen()
     {
-        optionChosen(1);
+        OptionChosen(1);
     }
-    public void option3Chosen()
+    public void Option3Chosen()
     {
-        optionChosen(2);
+        OptionChosen(2);
     }
-    public void option4Chosen()
+    public void Option4Chosen()
     {
-        optionChosen(3);
+        OptionChosen(3);
     }
 }

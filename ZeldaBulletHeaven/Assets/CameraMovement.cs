@@ -8,6 +8,6 @@ public class CameraMovement : MonoBehaviour
 
     void Update()
     {
-        transform.position = logic.followPlayer(-10);
+        transform.position = logic.FollowPlayer(-10);
     }
 }

@@ -14,13 +14,11 @@ public class EnemyScript : MonoBehaviour
     public SpriteRenderer sprite;
     public float health = 1;
     public float damage = 1;
-
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         moveSpeed = 2;
     }
-
     public void Start()
     {
         player = GameObject.FindGameObjectWithTag("Play Boi").GetComponent<PlayerScript>();
@@ -28,7 +26,6 @@ public class EnemyScript : MonoBehaviour
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
         //XP = GameObject.FindGameObjectWithTag("XP");
     }
-
     public void Update()
     {
         if (target)
@@ -50,33 +47,31 @@ public class EnemyScript : MonoBehaviour
         {
             Instantiate(XP, new Vector3 (transform.position.x, transform.position.y, 2), Quaternion.identity);
             Destroy(gameObject);
-            logic.killCounter();
+            logic.KillCounter();
         }
     }
-
     public void FixedUpdate()
     {
         if (target)
         {
             rb.velocity = new Vector2(moveDirection.x, moveDirection.y) * moveSpeed;
         }
-        transform.position = logic.zDepth(transform.position);
+        transform.position = logic.ZDepth(transform.position);
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.layer == 3 && player.iFrames <= 0)
         {
-            logic.playerDamage(damage);
+            logic.PlayerDamage(damage);
             player.iFrames = 10;
         }
  
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.layer == 7)
         {
-            health = logic.dealDamage(health, 0, new Vector3(transform.position.x + 0.4f, transform.position.y + 2.2f, -4));
+            health = logic.DealDamage(health, 0, new Vector3(transform.position.x + 0.4f, transform.position.y + 2.2f, -4));
         }
     }
 }

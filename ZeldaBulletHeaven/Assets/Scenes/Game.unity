@@ -176,7 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 0.392}
+  m_Color: {r: 0.1764706, g: 0.1764706, b: 0.1764706, a: 0.5882353}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1100,7 +1100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.254717, g: 0.254717, b: 0.254717, a: 0.5019608}
+  m_Color: {r: 0.1764706, g: 0.1764706, b: 0.1764706, a: 0.5882353}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1718,7 +1718,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 358731536}
         m_TargetAssemblyTypeName: LevelUpScript, Assembly-CSharp
-        m_MethodName: option4Chosen
+        m_MethodName: Option4Chosen
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2090,7 +2090,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 358731536}
         m_TargetAssemblyTypeName: LevelUpScript, Assembly-CSharp
-        m_MethodName: option2Chosen
+        m_MethodName: Option2Chosen
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3138,7 +3138,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 358731536}
         m_TargetAssemblyTypeName: LevelUpScript, Assembly-CSharp
-        m_MethodName: option3Chosen
+        m_MethodName: Option3Chosen
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3381,6 +3381,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseBool: 0
   pauseMenuUI: {fileID: 11696681}
+  levelUpScreen: {fileID: 358731531}
   timerText: {fileID: 348787154}
 --- !u!1 &1295970616
 GameObject:
@@ -4250,7 +4251,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 358731536}
         m_TargetAssemblyTypeName: LevelUpScript, Assembly-CSharp
-        m_MethodName: option1Chosen
+        m_MethodName: Option1Chosen
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4809,7 +4810,7 @@ MonoBehaviour:
       m_Action: Player Movement
       m_Flags: 8
     m_Flags: 0
-  bigUps: {fileID: 358731536}
+  lvlUp: {fileID: 358731536}
   spawner: {fileID: 439896757}
   sprite: {fileID: 1790533247}
   auto: {fileID: 366509401}

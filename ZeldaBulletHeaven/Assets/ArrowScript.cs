@@ -11,7 +11,8 @@ public class ArrowScript : MonoBehaviour
     public float aimAngle;
     [SerializeField] float bulletForce = 0.3f;
     public float lifespan = 25;
-    // Start is called before the first frame update
+    private int hitCount = 0;
+    private int maxHitCount = 3;
     void Awake()
     {
         playerPos = GameObject.FindGameObjectWithTag("Play Boi").GetComponent<Transform>();
@@ -26,10 +27,17 @@ public class ArrowScript : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (lifespan <= 0)
+        if (lifespan <= 0 || hitCount >= maxHitCount)
         {
             Destroy(gameObject);
         }
         lifespan--;
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == 6)
+        {
+            hitCount++;
+        }
     }
 }

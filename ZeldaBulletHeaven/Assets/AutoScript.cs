@@ -17,8 +17,6 @@ public class AutoScript : MonoBehaviour
     //public float xVar, yVar;
     //public Vector3 weaponOrigin;
     //public float offsetScale = 10;
-
-    // Start is called before the first frame update
     void Update()
     {
         /*Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
@@ -26,34 +24,32 @@ public class AutoScript : MonoBehaviour
         Vector2 runRise = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
         xVar = runRise.x * offsetScale;
         yVar = runRise.y * offsetScale;*/
-        transform.position = logic.followPlayer(-1);
-        transform.rotation = logic.aim(transform.position);
+        transform.position = logic.FollowPlayer(-1);
+        transform.rotation = logic.Aim(transform.position);
         if(swordHaste <= 3)
         {
             swordHaste = 3;
         }
 
     }
-
-    // Update is called once per frame
     void FixedUpdate()
     {
         if (swordCooldown <= 0 && player.health > 0)
         {
-            Instantiate(attack, transform.position, logic.aim(playerPos.position));
+            Instantiate(attack, transform.position, logic.Aim(playerPos.position));
             swordCooldown = swordHaste;
         }
         else
         {
             swordCooldown--;
         }
-        bowAttack();
+        BowAttack();
     }
-    void bowAttack()
+    void BowAttack()
     {
         if (bowCooldown <= 0 && player.health > 0)
         {
-            Instantiate(bowProjectile, transform.position, logic.aim(playerPos.position));
+            Instantiate(bowProjectile, transform.position, logic.Aim(playerPos.position));
             bowCooldown = bowHaste;
         }
         else

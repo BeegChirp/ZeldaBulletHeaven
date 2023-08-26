@@ -14,10 +14,9 @@ public class SwordScript : MonoBehaviour
         playerPos = GameObject.FindGameObjectWithTag("Play Boi").GetComponent<Transform>();
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
         auto = GameObject.FindGameObjectWithTag("Auto").GetComponent<AutoScript>();
-        transform.rotation = logic.aim(transform.position);
+        transform.rotation = logic.Aim(transform.position);
         //aimAngle = logic.angle;
     }
-
     private void Update()
     {
         transform.position = new Vector3(playerPos.position.x, playerPos.position.y, -1);
