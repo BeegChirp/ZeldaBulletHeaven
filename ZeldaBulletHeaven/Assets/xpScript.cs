@@ -23,7 +23,7 @@ public class xpScript : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Play Boi").GetComponent<PlayerScript>();
         playerPos = GameObject.FindGameObjectWithTag("Play Boi").GetComponent<Transform>();
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
-        moveSpeed = (player.moveSpeed * -1.4f);
+        moveSpeed = (player.moveSpeed * -1.4f); //start with negative speed to move away from the player before being picked up
         direction = Vector3.zero;
     }
     void Update()
@@ -33,11 +33,11 @@ public class xpScript : MonoBehaviour
         if (Vector2.Distance(playerXY, xpXY) <= player.pickupRange)
         {
             pickedUp = true;
-            direction = (playerPos.position - transform.position).normalized;
+            direction = (playerPos.position - transform.position).normalized; //set direction toward the player from xp's location. xp will be moving away to start
         }
         if (pickedUp)
         {
-            if(moveSpeed>0) direction = (playerPos.position - transform.position).normalized;
+            if (moveSpeed > 0) direction = (playerPos.position - transform.position).normalized; //adjust direction toward the player when speed is positive to collide with player
             moveDirection = direction;
         }
     }
@@ -45,24 +45,22 @@ public class xpScript : MonoBehaviour
     {
         if (pickedUp)
         {
-            //transform.position = new Vector3(transform.position.x, transform.position.y, 0);
-            rb.velocity = new Vector2(moveDirection.x, moveDirection.y) * moveSpeed;
+            rb.velocity = new Vector2(moveDirection.x, moveDirection.y) * moveSpeed; //move
             if (moveSpeed > 0)
             {
-                moveSpeed += (moveSpeed * 0.022f);
+                moveSpeed += (moveSpeed * 0.022f); //increase speed faster until speed is positive
             }
-            moveSpeed += player.moveSpeed*0.06f;
+            moveSpeed += player.moveSpeed * 0.06f; //increase speed based on player's speed
         }
-        //else transform.position = logic.zDepth(transform.position);
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 3)
+        if (collision.gameObject.layer == 3) //destroy xp once it collides with the player
         {
-            if(moveSpeed > 0)
+            if (moveSpeed > 0)
             {
-            player.xpProgress++;
-            Destroy(gameObject);
+                player.xpProgress++; //give xp
+                Destroy(gameObject);
             }
         }
     }

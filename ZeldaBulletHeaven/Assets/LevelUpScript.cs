@@ -23,19 +23,19 @@ public class LevelUpScript : MonoBehaviour
         {
             for (int b = 0; b < data.weaponWeights[a]; b++)
             {
-                weaponWeightList.Add(a);
+                weaponWeightList.Add(a); //make a weighted list of all weapons
             }
         }
         for (int a = 0; a < data.itemNames.Length; a++)
         {
             for (int b = 0; b < data.itemWeights[a]; b++)
             {
-                itemWeightList.Add(a);
+                itemWeightList.Add(a); //make a weighted list of all items
             }
         }
         for (int x = 0; x < buttons.Length; x++)
         {
-            buttons[x] = -1;
+            buttons[x] = -1; //set all buttons to empty
         }
     }
     private void Update()
@@ -48,51 +48,51 @@ public class LevelUpScript : MonoBehaviour
         {
             buttons[x] = -1;
         }
-        for (int i = 0; i < buttons.Length; i++)
+        for (int i = 0; i < buttons.Length; i++) //for every button on level up...
         {
-            while (buttons[i] == -1)
+            while (buttons[i] == -1) //while current option is empty...
             {
-                int randomCategory = Random.Range(0, 4);
+                int randomCategory = Random.Range(0, 4); //decide option category
                 int randomOption;
                 int weightedRoll;
 
-                if (randomCategory == 0)
+                if (randomCategory == 0) //if category is weapons...
                 {
-                    weightedRoll = Random.Range(0, weaponWeightList.Count);
-                    randomOption = weaponWeightList[weightedRoll];
-                    buttonsDisplay[i] = data.weaponNames[randomOption]; //weapon
+                    weightedRoll = Random.Range(0, weaponWeightList.Count); //weighted roll of all weapons
+                    randomOption = weaponWeightList[weightedRoll]; //save that weapon
+                    buttonsDisplay[i] = data.weaponNames[randomOption]; //display that weapon name
                     ButtonText(i);
                 }
-                else if (randomCategory == 1)
+                else if (randomCategory == 1) //if catgory is items...
                 {
-                    weightedRoll = Random.Range(0, itemWeightList.Count);
-                    randomOption = itemWeightList[weightedRoll];
-                    buttonsDisplay[i] = data.itemNames[randomOption]; //item
+                    weightedRoll = Random.Range(0, itemWeightList.Count); //weighted roll of all items
+                    randomOption = itemWeightList[weightedRoll]; //save that item ID
+                    buttonsDisplay[i] = data.itemNames[randomOption]; //display that item name
                     ButtonText(i);
-                    randomOption = randomOption + data.weaponWeights.Length;
+                    randomOption = randomOption + data.weaponNames.Length; //save item ID in global context
 
                 }
-                else if (randomCategory == 2)
+                else if (randomCategory == 2) //if category is statUp
                 {
-                    randomOption = Random.Range(0, data.statUpNames.Length);
-                    buttonsDisplay[i] = data.statUpNames[randomOption]; //statUp
+                    randomOption = Random.Range(0, data.statUpNames.Length); //pick a stat
+                    buttonsDisplay[i] = data.statUpNames[randomOption]; //display that stat name
                     ButtonText(i);
-                    randomOption = randomOption + data.weaponWeights.Length + data.itemWeights.Length;
+                    randomOption = randomOption + data.weaponNames.Length + data.itemNames.Length; //save stat in global context
                 }
                 else
                 {
-                    randomOption = Random.Range(0, player.skillNames.Length);
-                    buttonsDisplay[i] = player.skillNames[randomOption]; //skill
+                    randomOption = Random.Range(0, player.skillNames.Length); //pick a skill
+                    buttonsDisplay[i] = player.skillNames[randomOption]; //display that skill name
                     ButtonText(i);
-                    randomOption = randomOption + data.weaponWeights.Length + data.itemWeights.Length + data.statUpWeights.Length;
+                    randomOption = randomOption + data.weaponNames.Length + data.itemNames.Length + data.statUpNames.Length; //save skill in global context
                 }
 
                 //NEED TO FIND A WAY TO DETERMINE THE DIFFERENCE BETWEEN WEAPON X, ITEM X, SKILL X, AND STAT UP X
-                if (i == 0 || randomOption != buttons[0] && randomOption != buttons[1] && randomOption != buttons[2])
+                if (i == 0 || randomOption != buttons[0] && randomOption != buttons[1] && randomOption != buttons[2]) //if option is different from all other options, or the first option
                 {
                     Debug.Log(randomOption);
-                    buttons[i] = randomOption;
-                    /*if (player.acquiredStuff[randomCategory] < 6)
+                    buttons[i] = randomOption; //set option to button
+                    /*if (player.acquiredStuff[randomCategory] < 6) //if option is not maxLevel
                     {
                         if (player.acquiredStuff[randomCategory] < 0 && rerolled == false)
                         {
@@ -100,14 +100,14 @@ public class LevelUpScript : MonoBehaviour
                         }
                     }*/
                 }
-                else
+                else //otherwise, stay in while loop
                 {
                     buttons[i] = -1;
                 }
             }
         }
         levelUpCanvasGroup.alpha = 1;
-        Time.timeScale = 0f;
+        Time.timeScale = 0f; //pause
     }
     public void ButtonText(int i)
     {
@@ -131,55 +131,56 @@ public class LevelUpScript : MonoBehaviour
     public void OptionChosen(int i)
     {
         bool upgradeDone = false;
-        if (buttons[i] < data.weaponNames.Length)
+        if (buttons[i] < data.weaponNames.Length) //if option is a weapon
         {
             for (int a = 0; a < (player.weaponInventory.Length); a++)
             {
                 if (a < (player.weaponInventory.Length / 2))
                 {
-                    if (buttons[i] == player.weaponInventory[a, 0])
+                    if (buttons[i] == player.weaponInventory[a, 0]) //if player has this weapon
                     {
-                        player.weaponInventory[a, 1]++;
-                        upgradeDone = true;
+                        player.weaponInventory[a, 1]++; //increment level
+                        upgradeDone = true; //player had weapon, level incremented
                     }
                 }
-                else if (upgradeDone == false)
+                else if (upgradeDone == false) //if player doesn't have this weapon
                 {
-                    if (player.weaponInventory[(a - (player.weaponInventory.Length / 2)), 0] == -1)
+                    if (player.weaponInventory[(a - (player.weaponInventory.Length / 2)), 0] == -1) //find first empty slot
                     {
-                        player.weaponInventory[(a - (player.weaponInventory.Length / 2)), 0] = buttons[i];
-                        player.weaponInventory[(a - (player.weaponInventory.Length / 2)), 1]++;
-                        upgradeDone = true;
+                        player.weaponInventory[(a - (player.weaponInventory.Length / 2)), 0] = buttons[i]; //put weapon in that slot
+                        player.weaponInventory[(a - (player.weaponInventory.Length / 2)), 1]++; //increment level
+                        upgradeDone = true; //weapon added to player inventory
                     }
                 }
             }
         }
-        else if (buttons[i] < data.itemNames.Length + data.weaponNames.Length)
+        else if (buttons[i] < data.itemNames.Length + data.weaponNames.Length) //if option is an item
         {
             for (int b = 0; b < (player.itemInventory.Length); b++)
             {
                 if (b < (player.itemInventory.Length / 2))
                 {
-                    if (buttons[i] == player.itemInventory[b, 0])
+                    if (buttons[i] == player.itemInventory[b, 0]) //if player has this item
                     {
-                        player.itemInventory[b, 1]++;
-                        upgradeDone = true;
+                        player.itemInventory[b, 1]++; //increment level
+                        upgradeDone = true; //player had item, level incremented
                     }
                 }
-                else if (upgradeDone == false)
+                else if (upgradeDone == false) //if player doesn't have this item
                 {
-                    if (player.itemInventory[(b - (player.itemInventory.Length / 2)), 0] == -1)
+                    if (player.itemInventory[(b - (player.itemInventory.Length / 2)), 0] == -1) //find first empty slot
                     {
-                        player.itemInventory[(b - (player.itemInventory.Length / 2)), 0] = buttons[i];
-                        player.itemInventory[(b - (player.itemInventory.Length / 2)), 1]++;
-                        upgradeDone = true;
+                        player.itemInventory[(b - (player.itemInventory.Length / 2)), 0] = buttons[i]; //put item in that slot
+                        player.itemInventory[(b - (player.itemInventory.Length / 2)), 1]++; //increment level
+                        upgradeDone = true; //item added to player inventory
                     }
                 }
             }
         }
-        else if (buttons[i] < data.statUpNames.Length + data.itemNames.Length + data.weaponNames.Length)
+        else if (buttons[i] < data.statUpNames.Length + data.itemNames.Length + data.weaponNames.Length) //if option is a statUp
         {
-            //int stat = buttons[i] - data.itemNames.Length + data.weaponNames.Length;
+            Debug.Log(buttons[i]);
+            //int stat = buttons[i] - (data.itemNames.Length + data.weaponNames.Length);
             if (buttons[i] == 41)
             {
                 float healthUp = player.health / player.maxHealth;

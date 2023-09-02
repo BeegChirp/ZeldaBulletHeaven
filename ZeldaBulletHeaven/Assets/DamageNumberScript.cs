@@ -15,7 +15,7 @@ public class DamageNumberScript : MonoBehaviour
     }
     public void FixedUpdate()
     {
-        if(lifespan <= 0)
+        if(lifespan <= 0) //destroy number when lifespan reaches 0
         {
             Destroy(gameObject);
         }

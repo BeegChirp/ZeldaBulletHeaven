@@ -38,9 +38,9 @@ public class LogicScript : MonoBehaviour
     }
     public float DealDamage(float health, int weapon, Vector3 enemyLocation)
     {
-        int damage = (int)Mathf.Round((data.Weapon[weapon, 0, player.currentLevel] + Random.Range(-2f, 2f)));
-        bool crit = Random.Range(0, 100) < 30;
-        if (crit) damage = (int)(Mathf.Round(damage * 1.5f));
+        int damage = (int)Mathf.Round((data.Weapon[weapon, 0, player.weaponInventory[0,1]] + Random.Range(-2f, 2f)));
+        bool crit = Random.Range(0, 100) < player.criticalChance;
+        if (crit) damage = (int)(Mathf.Round(damage * player.criticalDamageMult));
         health -= damage;
         SpawnDamageNumber(damage, enemyLocation, crit); //get the damage ammount
         return health;

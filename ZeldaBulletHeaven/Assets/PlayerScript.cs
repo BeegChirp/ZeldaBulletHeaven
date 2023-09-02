@@ -51,17 +51,17 @@ public class PlayerScript : MonoBehaviour
     }
     private void Start()
     {
-        weaponInventory = new int[6, 2]
+        weaponInventory = new int[6, 2] //weaponID, currentWeaponLevel
         {
-            {0, 0}, {-1, -1}, {-1, -1}, {-1, -1 }, {-1, -1 }, {-1, -1 }
+            {0, 0}, {-1, -1}, {-1, -1}, {-1, -1 }, {-1, -1 }, {-1, -1 } //player starts with character unique weapon
         };
-        itemInventory = new int[6, 2]
+        itemInventory = new int[6, 2] //itemID, currentItemLevel
         {
             {-1, -1}, {-1, -1}, {-1, -1}, {-1, -1 }, {-1, -1 }, {-1, -1 }
         };
         skills = new int[3] { 0, 0, 0 };
         skillNames = new string[3] {
-            "Link Skill 1", "Link Skill 2", "Link Skill 3"
+            "Extra Ammo", "Heart Container", "Shield Parry"
         };
         currentLevel = 0;
         xpProgress = 0;
@@ -70,16 +70,16 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         moveDirection = playerMovement.ReadValue<Vector2>();
-        if (health <= 0)
+        if (health <= 0) //if player dies
         {
-            logic.GameOver();
-            rb.velocity = new Vector2(0, 0);
+            logic.GameOver(); //gameover
+            rb.velocity = new Vector2(0, 0); //stop moving
         }
-        if(Time.timeScale == 1)
+        if (Time.timeScale == 1)
         {
             if (Input.mousePosition.x <= Screen.width / 2)
             {
-                sprite.flipX = true;
+                sprite.flipX = true; //turn the player sprite around if looking left
             }
             else if (Input.mousePosition.x > Screen.width / 2)
             {
@@ -95,7 +95,7 @@ public class PlayerScript : MonoBehaviour
             xpOverflow = xpProgress - 10;
             currentLevel++;
             xpProgress = xpOverflow;
-            levelCounter.text = "Level: " + (currentLevel+1).ToString();
+            levelCounter.text = "Level: " + (currentLevel + 1).ToString();
             levelUpScreen.SetActive(true);
             lvlUp.LevelUp();
         }

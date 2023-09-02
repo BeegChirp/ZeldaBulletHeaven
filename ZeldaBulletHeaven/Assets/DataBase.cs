@@ -18,10 +18,10 @@ public class DataBase : MonoBehaviour
     public int[] statUpWeights;
     void Start()
     {
-        Weapon = new float[2, 5, 7] {
+        Weapon = new float[2, 5, 7] { //Weapon Stats
                 { { 10, 10, 12, 12, 12, 15, 17 }, { 100, 100, 90, 90, 85, 80, 75 }, { 1, 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1, 1 } },
                 { { 8, 8, 8, 12, 12, 15, 15}, { 120, 120, 90, 90, 85, 80, 75}, { 1, 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 2, 2, 2, 3 } }
-             };
+             }; //Damage, Haste, Size, Projectile Speed, Multishot
 
         names = new string[51]
         {
@@ -32,7 +32,7 @@ public class DataBase : MonoBehaviour
             "Health", "Attack", "Speed", "Critical", "Haste", "Pickup", "Luck", //7
             "Skill1", "Skill2", "Skill3", //3
         };
-        weights = new int[51]
+        weights = new int[51] //chance of each option appearing during level up
         {
             3, 3, 4, 3, 2, 4, 2, 2, 3, 4, 3, 2,
             3, 3, 2, 3, 3, 2, 2, 2, 1,
