@@ -22,7 +22,7 @@ public class PlayerScript : MonoBehaviour
     public string[] skillNames;
     public int[,] weaponInventory, itemInventory;
     public int[] skills;
-    public float health, maxHealth, attack, attackMult, moveSpeed, moveSpeedMult, criticalChance, criticalDamageMult, haste, pickupRange, luck;
+    public float health, maxHealth, attack, moveSpeed, moveSpeedMult, criticalChance, criticalDamageMult, haste, pickupRange, luck;
     public int xpProgress, currentLevel;
     private int xpOverflow;
     Vector2 moveDirection = Vector2.zero;
@@ -38,7 +38,6 @@ public class PlayerScript : MonoBehaviour
     {
         maxHealth = 100;
         health = maxHealth;
-        attackMult = 1;
         attack = 1;
         moveSpeed = 8.75f;
         moveSpeedMult = 1;
@@ -59,7 +58,7 @@ public class PlayerScript : MonoBehaviour
         {
             {-1, -1}, {-1, -1}, {-1, -1}, {-1, -1 }, {-1, -1 }, {-1, -1 }
         };
-        skills = new int[3] { 0, 0, 0 };
+        skills = new int[3] { -1, -1, -1 };
         skillNames = new string[1] { //3
             "Extra Ammo"/*, "Heart Container", "Shield Parry"*/
         };

@@ -7,8 +7,9 @@ public class AutoScript : MonoBehaviour
     public Transform playerPos;
     public PlayerScript player;
     public LogicScript logic;
+    public DataBase data;
     public ArrowScript arrowScript;
-    public float swordHaste = 100;
+    public float swordHaste;
     public float swordCooldown = 100;
     public GameObject attack;
     public float bowHaste = 100;
@@ -24,13 +25,14 @@ public class AutoScript : MonoBehaviour
         Vector2 runRise = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
         xVar = runRise.x * offsetScale;
         yVar = runRise.y * offsetScale;*/
+        swordHaste = data.WeaponStats[0, 1, player.weaponInventory[0, 1]] * player.haste;
+        //Debug.Log(swordHaste);
         transform.position = logic.FollowPlayer(-1);
         transform.rotation = logic.Aim(transform.position);
         if(swordHaste <= 3)
         {
             swordHaste = 3;
         }
-
     }
     void FixedUpdate()
     {

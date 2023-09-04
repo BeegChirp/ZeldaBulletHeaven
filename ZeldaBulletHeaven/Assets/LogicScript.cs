@@ -42,6 +42,7 @@ public class LogicScript : MonoBehaviour
         int damage = (int)Mathf.Round((data.WeaponStats[weapon, 0, player.weaponInventory[0,1]]));
         if (crit) damage = (int)(Mathf.Round(damage * player.criticalDamageMult));
         damage = damage + Random.Range(-2, 2);
+        damage = (int)(damage * player.attack);
         health -= damage;
         SpawnDamageNumber(damage, enemyLocation, crit); //get the damage ammount
         return health;

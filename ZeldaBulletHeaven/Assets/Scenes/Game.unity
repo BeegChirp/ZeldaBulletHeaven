@@ -1192,6 +1192,7 @@ MonoBehaviour:
   playerPos: {fileID: 1790533248}
   player: {fileID: 1790533250}
   logic: {fileID: 1295970617}
+  data: {fileID: 205759815}
   arrowScript: {fileID: 973085853876154222, guid: 2ca4243345ed155469d91b1e4661ce7c, type: 3}
   swordHaste: 100
   swordCooldown: 100
@@ -4824,7 +4825,6 @@ MonoBehaviour:
   health: 100
   maxHealth: 100
   attack: 0
-  attackMult: 0
   moveSpeed: 11.5
   moveSpeedMult: 0
   criticalChance: 0
