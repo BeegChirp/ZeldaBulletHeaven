@@ -38,9 +38,10 @@ public class LogicScript : MonoBehaviour
     }
     public float DealDamage(float health, int weapon, Vector3 enemyLocation)
     {
-        int damage = (int)Mathf.Round((data.Weapon[weapon, 0, player.weaponInventory[0,1]] + Random.Range(-2f, 2f)));
         bool crit = Random.Range(0, 100) < player.criticalChance;
+        int damage = (int)Mathf.Round((data.WeaponStats[weapon, 0, player.weaponInventory[0,1]]));
         if (crit) damage = (int)(Mathf.Round(damage * player.criticalDamageMult));
+        damage = damage + Random.Range(-2, 2);
         health -= damage;
         SpawnDamageNumber(damage, enemyLocation, crit); //get the damage ammount
         return health;
@@ -67,7 +68,6 @@ public class LogicScript : MonoBehaviour
     }
     public void RestartGame()
     {
-        fadeIn = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     public void RestartTime()
@@ -76,6 +76,7 @@ public class LogicScript : MonoBehaviour
     }
     void SpawnDamageNumber(int damage, Vector3 location, bool crit)
     {
+        location.z = -9;
         damageNumberText.text = damage.ToString();
         if (crit)
         {

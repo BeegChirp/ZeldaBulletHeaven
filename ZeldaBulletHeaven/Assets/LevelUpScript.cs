@@ -44,6 +44,7 @@ public class LevelUpScript : MonoBehaviour
     }
     public void LevelUp()
     {
+        Time.timeScale = 0f; //pause
         for (int x = 0; x < buttons.Length; x++)
         {
             buttons[x] = -1;
@@ -107,7 +108,7 @@ public class LevelUpScript : MonoBehaviour
             }
         }
         levelUpCanvasGroup.alpha = 1;
-        Time.timeScale = 0f; //pause
+        
     }
     public void ButtonText(int i)
     {
@@ -181,17 +182,17 @@ public class LevelUpScript : MonoBehaviour
         {
             Debug.Log(buttons[i]);
             //int stat = buttons[i] - (data.itemNames.Length + data.weaponNames.Length);
-            if (buttons[i] == 41)
+            if (buttons[i] == data.itemNames.Length + data.weaponNames.Length)
             {
                 float healthUp = player.health / player.maxHealth;
                 player.maxHealth += 50;
                 player.health = healthUp * player.maxHealth;
             }
-            if (buttons[i] == 42) player.attack++;
-            if (buttons[i] == 43) player.moveSpeed++;
-            if (buttons[i] == 44) player.criticalChance++;
-            if (buttons[i] == 45) player.haste++;
-            if (buttons[i] == 46) player.pickupRange++;
+            if (buttons[i] == data.itemNames.Length + data.weaponNames.Length + 1) player.attack++;
+            if (buttons[i] == data.itemNames.Length + data.weaponNames.Length + 1 + 1) player.moveSpeed++;
+            if (buttons[i] == data.itemNames.Length + data.weaponNames.Length + 1 + 1 + 1) player.criticalChance++;
+            if (buttons[i] == data.itemNames.Length + data.weaponNames.Length + 1 + 1 + 1 + 1) player.haste++;
+            if (buttons[i] == data.itemNames.Length + data.weaponNames.Length + 1 + 1 + 1 + 1 + 1) player.pickupRange++;
             else player.luck++;
         }
         else

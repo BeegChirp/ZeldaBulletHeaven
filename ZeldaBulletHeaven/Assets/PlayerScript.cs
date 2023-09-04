@@ -60,8 +60,8 @@ public class PlayerScript : MonoBehaviour
             {-1, -1}, {-1, -1}, {-1, -1}, {-1, -1 }, {-1, -1 }, {-1, -1 }
         };
         skills = new int[3] { 0, 0, 0 };
-        skillNames = new string[3] {
-            "Extra Ammo", "Heart Container", "Shield Parry"
+        skillNames = new string[1] { //3
+            "Extra Ammo"/*, "Heart Container", "Shield Parry"*/
         };
         currentLevel = 0;
         xpProgress = 0;
