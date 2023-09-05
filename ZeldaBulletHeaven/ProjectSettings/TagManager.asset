@@ -11,6 +11,7 @@ TagManager:
   - XP
   - Data
   - Damage Number
+  - Sword
   - Arrow
   layers:
   - Default

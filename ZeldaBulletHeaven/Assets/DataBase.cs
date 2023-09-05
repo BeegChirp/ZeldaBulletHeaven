@@ -41,13 +41,13 @@ public class DataBase : MonoBehaviour
             1, 1, 1, 1, 1, 1, 1,
             1, 1, 1
         };*/
-        weaponNames = new string[1] { //21
-            "Sword"/*, "Bow", "Boomerang", "Bombchu", "Hookshot", "Slingshot", "Hammer", "Spinner", "Ball & Chain", "Beetle", "Whip", "Bee Badge",
+        weaponNames = new string[2] { //21
+            "Sword", "Bow"/*, "Boomerang", "Bombchu", "Hookshot", "Slingshot", "Hammer", "Spinner", "Ball & Chain", "Beetle", "Whip", "Bee Badge",
             "Fire Rod", "Ice Rod", "Sand Rod", "Lightning Rod", "Deku Leaf", "Ether Medallion", "Bombos Medallion", "Quake Medallion", "Ocarina of Time",*/
         };
-        weaponWeights = new int[1] //21
+        weaponWeights = new int[2] //21
         {
-            3/*, 3, 4, 3, 2, 4, 2, 2, 3, 4, 3, 2,
+            3, 3/*, 4, 3, 2, 4, 2, 2, 3, 4, 3, 2,
             3, 3, 2, 3, 3, 2, 2, 2, 1*/
         };
         itemNames = new string[1] { //20

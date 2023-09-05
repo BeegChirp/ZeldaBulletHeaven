@@ -38,13 +38,18 @@ public class LogicScript : MonoBehaviour
     }
     public float DealDamage(float health, int weapon, Vector3 enemyLocation)
     {
+        int weaponSlot = -1;
         bool crit = Random.Range(0, 100) < player.criticalChance;
-        int damage = (int)Mathf.Round((data.WeaponStats[weapon, 0, player.weaponInventory[0,1]]));
-        if (crit) damage = (int)(Mathf.Round(damage * player.criticalDamageMult));
-        damage = damage + Random.Range(-2, 2);
+        for (int a = 0; a < (player.weaponInventory.Length / 2); a++)
+        {
+            if (a == player.weaponInventory[a, 0]) weaponSlot = a;
+        }
+        int damage = (int)data.WeaponStats[weapon, 0, player.weaponInventory[weaponSlot, 1]];
         damage = (int)(damage * player.attack);
+        damage = (int)Mathf.Round(damage + Random.Range(data.WeaponStats[weapon, 0, player.weaponInventory[weaponSlot, 1]] * 0.1f, data.WeaponStats[weapon, 0, player.weaponInventory[weaponSlot, 1]] * -0.1f));
+        if (crit) damage = (int)Mathf.Round(damage * player.criticalDamageMult);
         health -= damage;
-        SpawnDamageNumber(damage, enemyLocation, crit); //get the damage ammount
+        SpawnDamageNumber(damage, enemyLocation, crit, false); //get the damage ammount
         return health;
     }
     public Vector3 FollowPlayer(int zDim)
@@ -57,6 +62,12 @@ public class LogicScript : MonoBehaviour
         gameOverScreen.SetActive(true);
         fadeIn = true;
     }
+    public int GetWeaponID(string id)
+    {
+        if (id == "Sword") return 0;
+        if (id == "Arrow") return 1;
+        else return -1;
+    }
     public void KillCounter()
     {
         killCount++;
@@ -65,7 +76,7 @@ public class LogicScript : MonoBehaviour
     public void PlayerDamage(float damage)
     {
         player.health = player.health - damage;
-        SpawnDamageNumber((int)damage, player.transform.position, false);
+        SpawnDamageNumber((int)damage, player.transform.position, false, true);
     }
     public void RestartGame()
     {
@@ -75,19 +86,27 @@ public class LogicScript : MonoBehaviour
     {
         Time.timeScale = 1f;
     }
-    void SpawnDamageNumber(int damage, Vector3 location, bool crit)
+    void SpawnDamageNumber(int damage, Vector3 location, bool crit, bool player)
     {
         location.z = -9;
         damageNumberText.text = damage.ToString();
         if (crit)
         {
             damageNumberText.color = new Color32(255, 187, 0, 255);
-            damageNumberText.fontStyle = FontStyles.Bold;
+            //damageNumberText.fontStyle = FontStyles.Normal;
+            damageNumberText.fontSize = 17;
+        }
+        else if (player)
+        {
+            damageNumberText.color = new Color32(255, 71, 51, 255);
+            //damageNumberText.fontStyle = FontStyles.Normal;
+            damageNumberText.fontSize = 15;
         }
         else
         {
             damageNumberText.color = new Color32(255, 255, 255, 255);
-            damageNumberText.fontStyle = FontStyles.Normal;
+            //damageNumberText.fontStyle = FontStyles.Normal;
+            damageNumberText.fontSize = 15;
         }
         GameObject damageNumberPrefab = Instantiate(damageNumber, location, Quaternion.identity);
         Rigidbody2D rb = damageNumberPrefab.GetComponent<Rigidbody2D>();

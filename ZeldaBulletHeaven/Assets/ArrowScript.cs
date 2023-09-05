@@ -13,8 +13,10 @@ public class ArrowScript : MonoBehaviour
     public float lifespan = 25;
     private int hitCount = 0;
     private int maxHitCount = 3;
+    public int ID;
     void Awake()
     {
+        ID = 1;
         playerPos = GameObject.FindGameObjectWithTag("Play Boi").GetComponent<Transform>();
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
         auto = GameObject.FindGameObjectWithTag("Auto").GetComponent<AutoScript>();

@@ -1196,10 +1196,10 @@ MonoBehaviour:
   arrowScript: {fileID: 973085853876154222, guid: 2ca4243345ed155469d91b1e4661ce7c, type: 3}
   swordHaste: 100
   swordCooldown: 100
-  attack: {fileID: 2943141158871681141, guid: 265437a049c46f6408b0c2e6aaa86739, type: 3}
+  Sword: {fileID: 2943141158871681141, guid: 265437a049c46f6408b0c2e6aaa86739, type: 3}
   bowHaste: 100
   bowCooldown: 0
-  bowProjectile: {fileID: 5928568057387903828, guid: 2ca4243345ed155469d91b1e4661ce7c, type: 3}
+  Arrow: {fileID: 5928568057387903828, guid: 2ca4243345ed155469d91b1e4661ce7c, type: 3}
 --- !u!4 &366509402
 Transform:
   m_ObjectHideFlags: 0

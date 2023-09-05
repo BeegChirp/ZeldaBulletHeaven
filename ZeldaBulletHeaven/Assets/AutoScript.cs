@@ -11,10 +11,10 @@ public class AutoScript : MonoBehaviour
     public ArrowScript arrowScript;
     public float swordHaste;
     public float swordCooldown = 100;
-    public GameObject attack;
+    public GameObject Sword;
     public float bowHaste = 100;
     public float bowCooldown;
-    public GameObject bowProjectile;
+    public GameObject Arrow;
     //public float xVar, yVar;
     //public Vector3 weaponOrigin;
     //public float offsetScale = 10;
@@ -38,7 +38,7 @@ public class AutoScript : MonoBehaviour
     {
         if (swordCooldown <= 0 && player.health > 0)
         {
-            Instantiate(attack, transform.position, logic.Aim(playerPos.position));
+            Instantiate(Sword, transform.position, logic.Aim(playerPos.position));
             swordCooldown = swordHaste;
         }
         else
@@ -51,7 +51,7 @@ public class AutoScript : MonoBehaviour
     {
         if (bowCooldown <= 0 && player.health > 0)
         {
-            Instantiate(bowProjectile, transform.position, logic.Aim(playerPos.position));
+            Instantiate(Arrow, transform.position, logic.Aim(playerPos.position));
             bowCooldown = bowHaste;
         }
         else

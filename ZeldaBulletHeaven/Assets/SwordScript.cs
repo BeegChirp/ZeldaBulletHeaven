@@ -9,8 +9,10 @@ public class SwordScript : MonoBehaviour
     public float lifespan = 25;
     public AutoScript auto;
     public float aimAngle;
+    public int ID;
     void Start()
     {
+        ID = 0;
         playerPos = GameObject.FindGameObjectWithTag("Play Boi").GetComponent<Transform>();
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
         auto = GameObject.FindGameObjectWithTag("Auto").GetComponent<AutoScript>();
