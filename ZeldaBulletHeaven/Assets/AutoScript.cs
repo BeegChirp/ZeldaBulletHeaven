@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,32 +12,42 @@ public class AutoScript : MonoBehaviour
     public ArrowScript arrowScript;
     public float swordHaste;
     public float swordCooldown = 100;
-    public GameObject Sword;
+    public GameObject Sword, Arrow;
     public float bowHaste = 100;
     public float bowCooldown;
-    public GameObject Arrow;
-    //public float xVar, yVar;
-    //public Vector3 weaponOrigin;
-    //public float offsetScale = 10;
+    //public GameObject[] Weapons;
+    public float[] weaponCooldown;
+    //private List<Action> weaponAttacks;
+    private Action[] weaponAttacks;
+    void Start()
+    {
+        weaponAttacks = new Action[2] { SwordAttack, BowAttack };
+    }
     void Update()
     {
-        /*Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x);
-        Vector2 runRise = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
-        xVar = runRise.x * offsetScale;
-        yVar = runRise.y * offsetScale;*/
         swordHaste = data.WeaponStats[0, 1, player.weaponInventory[0, 1]] * player.haste;
-        //Debug.Log(swordHaste);
-        transform.position = logic.FollowPlayer(-1);
-        transform.rotation = logic.Aim(transform.position);
-        if(swordHaste <= 3)
+        transform.SetPositionAndRotation(logic.FollowPlayer(-1), logic.Aim(transform.position));
+        if (swordHaste < 3)
         {
             swordHaste = 3;
         }
     }
     void FixedUpdate()
     {
-        if (swordCooldown <= 0 && player.health > 0)
+        if (player.health > 0)
+        {
+            for (int slot = 0; slot < player.weaponInventory.Length / 2; slot++)
+            {
+                if (player.weaponInventory[slot, 0] > -1)
+                {
+                    weaponAttacks[player.weaponInventory[slot, 0]]();
+                }
+            }
+        }
+    }
+    private void SwordAttack()
+    {
+        if (swordCooldown <= 0)
         {
             Instantiate(Sword, transform.position, logic.Aim(playerPos.position));
             swordCooldown = swordHaste;
@@ -45,11 +56,10 @@ public class AutoScript : MonoBehaviour
         {
             swordCooldown--;
         }
-        BowAttack();
     }
-    void BowAttack()
+    private void BowAttack()
     {
-        if (bowCooldown <= 0 && player.health > 0)
+        if (bowCooldown <= 0)
         {
             Instantiate(Arrow, transform.position, logic.Aim(playerPos.position));
             bowCooldown = bowHaste;
