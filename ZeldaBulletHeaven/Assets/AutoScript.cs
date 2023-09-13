@@ -9,64 +9,42 @@ public class AutoScript : MonoBehaviour
     public PlayerScript player;
     public LogicScript logic;
     public DataBase data;
-    public ArrowScript arrowScript;
-    public float swordHaste;
-    public float swordCooldown = 100;
     public GameObject Sword, Arrow;
-    public float bowHaste = 100;
-    public float bowCooldown;
-    //public GameObject[] Weapons;
+    public GameObject[] Weapon;
     public float[] weaponCooldown;
-    //private List<Action> weaponAttacks;
-    private Action[] weaponAttacks;
     void Start()
     {
-        weaponAttacks = new Action[2] { SwordAttack, BowAttack };
+        Weapon = new GameObject[2] { Sword, Arrow, };
+        weaponCooldown = new float[6]; //cooldowns for weapon inventory
     }
     void Update()
     {
-        swordHaste = data.WeaponStats[0, 1, player.weaponInventory[0, 1]] * player.haste;
+        //swordHaste = data.WeaponStats[0, 1, player.weaponInventory[0, 1]] * player.haste;
         transform.SetPositionAndRotation(logic.FollowPlayer(-1), logic.Aim(transform.position));
-        if (swordHaste < 3)
-        {
-            swordHaste = 3;
-        }
     }
     void FixedUpdate()
     {
-        if (player.health > 0)
+        if (player.health > 0) //if player is alive
         {
-            for (int slot = 0; slot < player.weaponInventory.Length / 2; slot++)
+            for (int slot = 0; slot < player.weaponInventory.Length / 2; slot++) //look through each weapon inventory slot
             {
-                if (player.weaponInventory[slot, 0] > -1)
+                if (player.weaponInventory[slot, 0] > -1) //if there is a weapon
                 {
-                    weaponAttacks[player.weaponInventory[slot, 0]]();
+                    Attack(player.weaponInventory[slot, 0], slot); //attack with that weapon
                 }
             }
         }
     }
-    private void SwordAttack()
+    private void Attack(int id, int slot)
     {
-        if (swordCooldown <= 0)
+        if (weaponCooldown[slot] <= 0) //if this weapon's cooldown is up
         {
-            Instantiate(Sword, transform.position, logic.Aim(playerPos.position));
-            swordCooldown = swordHaste;
+            Instantiate(Weapon[id], transform.position, logic.Aim(playerPos.position)); //spawn new attack
+            weaponCooldown[slot] = data.WeaponStats[id, 1, player.weaponInventory[slot, 1]] * player.haste; //reset cooldown
         }
         else
         {
-            swordCooldown--;
-        }
-    }
-    private void BowAttack()
-    {
-        if (bowCooldown <= 0)
-        {
-            Instantiate(Arrow, transform.position, logic.Aim(playerPos.position));
-            bowCooldown = bowHaste;
-        }
-        else
-        {
-            bowCooldown--;
+            weaponCooldown[slot]--; //deplete cooldown
         }
     }
 }

@@ -40,9 +40,9 @@ public class LogicScript : MonoBehaviour
     {
         int weaponSlot = -1;
         bool crit = Random.Range(0, 100) < player.criticalChance;
-        for (int a = 0; a < (player.weaponInventory.Length / 2); a++)
+        for (int a = 0; a < (player.weaponInventory.Length / 2); a++) //look through weapon inventory
         {
-            if (a == player.weaponInventory[a, 0]) weaponSlot = a;
+            if (weapon == player.weaponInventory[a, 0]) weaponSlot = a;
         }
         int damage = (int)data.WeaponStats[weapon, 0, player.weaponInventory[weaponSlot, 1]];
         damage = (int)(damage * player.attack);
@@ -64,6 +64,7 @@ public class LogicScript : MonoBehaviour
     }
     public int GetWeaponID(string id)
     {
+        Debug.Log(id);
         if (id == "Sword") return 0;
         if (id == "Arrow") return 1;
         else return -1;

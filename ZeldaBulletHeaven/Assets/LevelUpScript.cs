@@ -58,7 +58,7 @@ public class LevelUpScript : MonoBehaviour
                 {
                     weightedRoll = Random.Range(0, weaponWeightList.Count); //weighted roll of all weapons
                     randomOption = weaponWeightList[weightedRoll]; //save that weapon
-                    for (int a = 0; a < (player.weaponInventory.Length/2); a++)
+                    for (int a = 0; a < (player.weaponInventory.Length / 2); a++)
                     {
                         if (randomOption == player.weaponInventory[a, 0] && player.weaponInventory[a, 1] >= 6) //if player has this weapon & the weapon is max level
                         {
@@ -72,7 +72,7 @@ public class LevelUpScript : MonoBehaviour
                 {
                     weightedRoll = Random.Range(0, itemWeightList.Count); //weighted roll of all items
                     randomOption = itemWeightList[weightedRoll]; //save that item ID
-                    for (int a = 0; a < (player.itemInventory.Length/2); a++)
+                    for (int a = 0; a < (player.itemInventory.Length / 2); a++)
                     {
                         if (randomOption == player.itemInventory[a, 0] && player.itemInventory[a, 1] >= 6) //if player has this item & the item is max level
                         {
@@ -94,17 +94,17 @@ public class LevelUpScript : MonoBehaviour
                 else
                 {
                     randomOption = Random.Range(0, player.skillNames.Length); //pick a skill
-                    if (player.skills[randomOption] >= 2) //if player has this weapon
+                    if (player.skills[randomOption] >= 2) //if this skill is max level
                     {
-                        maxLevel = true;
+                        maxLevel = true; //mark option as maxed out
                     }
                     buttonsDisplay[i] = player.skillNames[randomOption]; //display that skill name
                     ButtonText(i);
                     randomOption = randomOption + data.weaponNames.Length + data.itemNames.Length + data.statUpNames.Length; //save skill in global context
                 }
-                if (randomOption != buttons[0] && randomOption != buttons[1] && randomOption != buttons[2] && maxLevel == false) //if option is different from all other options, or the first option
+                if (randomOption != buttons[0] && randomOption != buttons[1] && randomOption != buttons[2] && maxLevel == false) //if option is different from all other options, and isn't max level
                 {
-                        buttons[i] = randomOption;
+                    buttons[i] = randomOption; //assign option to button
                 }
                 else //otherwise, stay in while loop
                 {
@@ -147,6 +147,7 @@ public class LevelUpScript : MonoBehaviour
                     if (buttons[i] == player.weaponInventory[a, 0]) //if player has this weapon
                     {
                         player.weaponInventory[a, 1]++; //increment level
+                        Debug.Log(player.weaponInventory[a, 1]);
                         upgradeDone = true; //player had weapon, level incremented
                     }
                 }
@@ -156,6 +157,7 @@ public class LevelUpScript : MonoBehaviour
                     {
                         player.weaponInventory[(a - (player.weaponInventory.Length / 2)), 0] = buttons[i]; //put weapon in that slot
                         player.weaponInventory[(a - (player.weaponInventory.Length / 2)), 1]++; //increment level
+                        Debug.Log(player.weaponInventory[a - (player.weaponInventory.Length / 2), 1]);
                         upgradeDone = true; //weapon added to player inventory
                     }
                 }
@@ -172,7 +174,7 @@ public class LevelUpScript : MonoBehaviour
                         player.itemInventory[b, 1]++; //increment level
                         for (int g = 0; g < (player.itemInventory.Length) / 2; g++)
                         {
-                            Debug.Log(player.itemInventory[g,0]);
+                            Debug.Log(player.itemInventory[g, 0]);
                         }
                         upgradeDone = true; //player had item, level incremented
                     }
@@ -199,10 +201,10 @@ public class LevelUpScript : MonoBehaviour
                 player.maxHealth += 50;
                 player.health = (int)Mathf.Round(healthUp * player.maxHealth);
             }
-            if (buttons[i] == data.itemNames.Length + data.weaponNames.Length + 1) player.attack = player.attack + 0.1f;
+            if (buttons[i] == data.itemNames.Length + data.weaponNames.Length + 1) player.attack = player.attack * 1.1f;
             if (buttons[i] == data.itemNames.Length + data.weaponNames.Length + 1 + 1) player.moveSpeed++;
             if (buttons[i] == data.itemNames.Length + data.weaponNames.Length + 1 + 1 + 1) player.criticalChance++;
-            if (buttons[i] == data.itemNames.Length + data.weaponNames.Length + 1 + 1 + 1 + 1) player.haste = player.haste - 0.1f;
+            if (buttons[i] == data.itemNames.Length + data.weaponNames.Length + 1 + 1 + 1 + 1) player.haste = player.haste * 0.9f;
             if (buttons[i] == data.itemNames.Length + data.weaponNames.Length + 1 + 1 + 1 + 1 + 1) player.pickupRange++;
             else player.luck++;
         }
