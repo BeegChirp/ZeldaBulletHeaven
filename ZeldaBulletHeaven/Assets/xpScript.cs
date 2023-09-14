@@ -59,7 +59,7 @@ public class xpScript : MonoBehaviour
         {
             if (moveSpeed > 0)
             {
-                player.xpProgress++; //give xp
+                player.xpOverflow++; //give xp
                 Destroy(gameObject);
             }
         }

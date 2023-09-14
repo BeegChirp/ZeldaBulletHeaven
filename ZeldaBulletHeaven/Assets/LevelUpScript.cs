@@ -174,7 +174,7 @@ public class LevelUpScript : MonoBehaviour
                         player.itemInventory[b, 1]++; //increment level
                         for (int g = 0; g < (player.itemInventory.Length) / 2; g++)
                         {
-                            Debug.Log(player.itemInventory[g, 0]);
+                            Debug.Log(player.itemInventory[g, 1]);
                         }
                         upgradeDone = true; //player had item, level incremented
                     }

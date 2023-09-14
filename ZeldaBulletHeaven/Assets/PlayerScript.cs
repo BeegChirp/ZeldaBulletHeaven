@@ -10,30 +10,33 @@ public class PlayerScript : MonoBehaviour
     public Rigidbody2D rb;
     public GameObject levelUpScreen;
     public LogicScript logic;
-    public InputAction playerMovement;
+    /*public InputAction playerMovement;*/
     public LevelUpScript lvlUp;
     public EnemySpawnScript spawner;
     public SpriteRenderer sprite;
     public AutoScript auto;
+    public bool hellMode = false;
+    public GameObject XP;
     public MenuScript menu;
     public Animator animator;
     public TextMeshProUGUI hpDisplay, levelCounter;
+    public PlayerControls playerControls;
     public int iFrames = 0;
     public string[] skillNames;
     public int[,] weaponInventory, itemInventory;
     public int[] skills;
-    public float health, maxHealth, attack, moveSpeed, moveSpeedMult, criticalChance, criticalDamageMult, haste, pickupRange, luck;
+    public float health, maxHealth, attack, moveSpeed, moveSpeedMult, criticalChance, criticalDamageMult, haste, pickupRange, luck, size;
     public int xpProgress, currentLevel;
-    private int xpOverflow;
+    public int xpOverflow;
     Vector2 moveDirection = Vector2.zero;
-    private void OnEnable()
+    /*private void OnEnable()
     {
-        playerMovement.Enable();
+        playerControls.Enable();
     }
     private void OnDisable()
     {
-        playerMovement.Disable();
-    }
+        playerControls.Disable();
+    }*/
     private void Awake()
     {
         maxHealth = 100;
@@ -44,12 +47,14 @@ public class PlayerScript : MonoBehaviour
         criticalChance = 10;
         criticalDamageMult = 1.5f;
         haste = 1;
+        size = 1;
         pickupRange = 3f;
         luck = 0;
         Time.timeScale = 1f;
     }
     private void Start()
     {
+        playerControls = new PlayerControls();
         weaponInventory = new int[6, 2] //weaponID, currentWeaponLevel
         {
             {0, 0}, {-1, -1}, {-1, -1}, {-1, -1 }, {-1, -1 }, {-1, -1 } //player starts with character unique weapon
@@ -68,9 +73,10 @@ public class PlayerScript : MonoBehaviour
     }
     void Update()
     {
-        moveDirection = playerMovement.ReadValue<Vector2>();
+        //moveDirection = playerMovement.ReadValue<Vector2>();
         if (health <= 0) //if player dies
         {
+            health = 0; //no negative health
             logic.GameOver(); //gameover
             rb.velocity = new Vector2(0, 0); //stop moving
         }
@@ -85,20 +91,23 @@ public class PlayerScript : MonoBehaviour
                 sprite.flipX = false;
             }
         }
-        if (pickupRange > 10f)
+        if (xpProgress >= 10 && health > 0)
         {
-            pickupRange = 10f;
-        }
-        if (xpProgress >= 10)
-        {
-            xpOverflow = xpProgress - 10;
             currentLevel++;
-            xpProgress = xpOverflow;
+            xpProgress = 0;
             levelCounter.text = "Level: " + (currentLevel + 1).ToString();
             levelUpScreen.SetActive(true);
             lvlUp.LevelUp();
         }
         hpDisplay.text = "Health: " + health.ToString();
+        if (hellMode)
+        {
+            spawner.scaledTimer = 5;
+        }
+        else
+        {
+            spawner.scaledTimer = 50;
+        }
     }
     private void FixedUpdate()
     {
@@ -106,12 +115,34 @@ public class PlayerScript : MonoBehaviour
         {
             animator.SetFloat("SpeedX", moveDirection.x);
             animator.SetFloat("SpeedY", moveDirection.y);
-            rb.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
         }
 
         if (iFrames > 0)
         {
             iFrames--;
         }
+
+        if (xpOverflow > 0)
+        {
+            xpOverflow--;
+            xpProgress++;
+        }
+    }
+
+    private void OnMove(InputValue inputValue)
+    {
+        rb.velocity = inputValue.Get<Vector2>() * moveSpeed;
+    }
+
+    private void OnSpawnXP()
+    {
+        for (int xp = 0; xp < 100; xp++)
+        {
+            Instantiate(XP, transform);
+        }
+    }
+    private void OnHellMode()
+    {
+        hellMode =! hellMode;
     }
 }

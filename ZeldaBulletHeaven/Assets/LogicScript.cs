@@ -64,7 +64,7 @@ public class LogicScript : MonoBehaviour
     }
     public int GetWeaponID(string id)
     {
-        Debug.Log(id);
+        //Debug.Log(id);
         if (id == "Sword") return 0;
         if (id == "Arrow") return 1;
         else return -1;

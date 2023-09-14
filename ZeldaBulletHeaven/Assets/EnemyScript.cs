@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 8f;
+    public float moveSpeed;
     Vector2 moveDirection;
     Rigidbody2D rb;
     Transform target;
@@ -48,6 +48,14 @@ public class EnemyScript : MonoBehaviour
             Instantiate(XP, new Vector3 (transform.position.x, transform.position.y, 2), Quaternion.identity);
             Destroy(gameObject);
             logic.KillCounter();
+        }
+        if (player.hellMode)
+        {
+            moveSpeed = 20;
+        }
+        else
+        {
+            moveSpeed = 2;
         }
     }
     public void FixedUpdate()
