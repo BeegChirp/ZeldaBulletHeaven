@@ -51,6 +51,10 @@ public class xpScript : MonoBehaviour
                 moveSpeed += (moveSpeed * 0.022f); //increase speed faster until speed is positive
             }
             moveSpeed += player.moveSpeed * 0.06f; //increase speed based on player's speed
+            if(moveSpeed > 100)
+            {
+                moveSpeed = 100;
+            }
         }
     }
     private void OnTriggerStay2D(Collider2D collision)

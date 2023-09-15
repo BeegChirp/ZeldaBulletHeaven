@@ -12,20 +12,18 @@ public class EnemyScript : MonoBehaviour
     public PlayerScript player;
     public GameObject XP;
     public SpriteRenderer sprite;
+    public int iframes;
     public float health = 1;
     public float damage = 1;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        moveSpeed = 2;
-    }
-    public void Start()
-    {
         player = GameObject.FindGameObjectWithTag("Play Boi").GetComponent<PlayerScript>();
         target = GameObject.FindGameObjectWithTag("Play Boi").transform;
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
-        //XP = GameObject.FindGameObjectWithTag("XP");
+        moveSpeed = 2;
     }
+
     public void Update()
     {
         if (target)

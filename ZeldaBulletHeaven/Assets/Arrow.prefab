@@ -174,7 +174,10 @@ MonoBehaviour:
   playerPos: {fileID: 0}
   logic: {fileID: 0}
   auto: {fileID: 0}
-  rb: {fileID: 0}
+  rb: {fileID: 1151363737608051927}
+  direction: {x: 0, y: 0}
   aimAngle: 0
   bulletForce: 82
   lifespan: 25
+  startup: 100
+  ID: 0
