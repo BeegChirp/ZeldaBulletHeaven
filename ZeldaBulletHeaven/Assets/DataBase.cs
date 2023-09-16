@@ -35,14 +35,18 @@ public class DataBase : MonoBehaviour
         };
     public readonly float[,,] WeaponStats = new float[3, 5, 7] //Weapon Stats
     {
-        { { 10, 20, 30, 40, 50, 60, 70 }, { 100, 90, 80, 70, 60, 50, 40 }, { 1, 1.1f, 1.2f, 1.3f, 1.4f, 1.5f, 1.6f }, { 1, 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1, 1 } }, //Sword
+        { { 10, 12, 12, 12, 12, 15, 15 }, { 100, 100, 100, 85, 85, 85, 85 }, { 1, 1, 1.25f, 1.25f, 1.25f, 1.25f, 1.25f }, { 1, 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 2, 2, 4 } }, //Sword
         { { 8, 8, 8, 12, 12, 15, 15 }, { 120, 120, 90, 90, 85, 80, 75 }, { 1, 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 2, 2, 2, 3 } }, //Bow
         { { 8, 8, 8, 12, 12, 15, 15 }, { 120, 120, 90, 90, 85, 80, 75 }, { 1, 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 2, 2, 2, 3 } } //Boomerang
     }; //Damage, Haste, Size, Projectile Speed, Multishot
     //Weapons, Stats, Levels
+    public readonly float[] miscDamageTypes = new float[1]
+    {
+        9
+    };
     void Start()
     {
-        /*names = new string[51]
+        names = new string[51]
         {
             "Sword", "Bow", "Boomerang", "Bombchu", "Hookshot", "Slingshot", "Hammer", "Spinner", "Ball & Chain", "Beetle", "Whip", "Bee Badge", //12
             "Fire Rod", "Ice Rod", "Sand Rod", "Lightning Rod", "Deku Leaf", "Ether Medallion", "Bombos Medallion", "Quake Medallion", "Ocarina of Time", //9
@@ -50,7 +54,7 @@ public class DataBase : MonoBehaviour
             "Magic Armor", "Lens of Truth", "Fairy", "Tornado Rod", "Pegasus Boots", "Mirror Shield", "Weapon Pouch", "Zora Flipper", "Roc's Feather", "Stamina Scroll", "Goddess Harp", //11
             "Health", "Attack", "Speed", "Critical", "Haste", "Pickup", "Luck", //7
             "Skill1", "Skill2", "Skill3", //3
-        };*/
+        };
         /*weights = new int[51] //chance of each option appearing during level up
         {
             3, 3, 4, 3, 2, 4, 2, 2, 3, 4, 3, 2,

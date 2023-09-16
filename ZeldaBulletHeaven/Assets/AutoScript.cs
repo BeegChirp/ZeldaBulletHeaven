@@ -39,7 +39,7 @@ public class AutoScript : MonoBehaviour
     {
         if (weaponCooldown[slot] <= 0) //if this weapon's cooldown is up
         {
-            Instantiate(Weapon[id], transform.position, logic.Aim(playerPos.position)); //spawn new attack
+            Instantiate(Weapon[id], transform.position, logic.Aim(playerPos.position)); //spawn new attack            
             weaponCooldown[slot] = data.WeaponStats[id, 1, player.weaponInventory[slot, 1]] * player.haste; //reset cooldown
         }
         else

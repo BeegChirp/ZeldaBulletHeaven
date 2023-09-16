@@ -11,6 +11,7 @@ public class EnemyScript : MonoBehaviour
     public LogicScript logic;
     public PlayerScript player;
     public GameObject XP;
+    public DataBase data;
     public SpriteRenderer sprite;
     public int iframes;
     public float health = 1;
@@ -21,6 +22,7 @@ public class EnemyScript : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Play Boi").GetComponent<PlayerScript>();
         target = GameObject.FindGameObjectWithTag("Play Boi").transform;
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
+        data = GameObject.FindGameObjectWithTag("Data").GetComponent<DataBase>();
         moveSpeed = 2;
     }
 
@@ -43,7 +45,7 @@ public class EnemyScript : MonoBehaviour
 
         if (health <= 0)
         {
-            Instantiate(XP, new Vector3 (transform.position.x, transform.position.y, 2), Quaternion.identity);
+            Instantiate(XP, new Vector3(transform.position.x, transform.position.y, 2), Quaternion.identity);
             Destroy(gameObject);
             logic.KillCounter();
         }
@@ -71,14 +73,32 @@ public class EnemyScript : MonoBehaviour
             logic.PlayerDamage(damage);
             player.iFrames = 10;
         }
- 
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.layer == 7)
+        int weaponSlot = -1;
+        if (collision.gameObject.layer == 7)
         {
-            int weapon = logic.GetWeaponID(collision.gameObject.tag);
-            health = logic.DealDamage(health, weapon, new Vector3(transform.position.x + 0.4f, transform.position.y + 2.2f, -4));
+            int weapon = logic.GetCollisionID(collision.gameObject.tag);
+            int damage;
+            if (weapon < data.weaponNames.Length + data.itemNames.Length + data.statUpNames.Length + 3)
+            {
+                for (int a = 0; a < (player.weaponInventory.Length / 2); a++) //look through weapon inventory
+                {
+                    if (weapon == player.weaponInventory[a, 0]) weaponSlot = a;
+                }
+                damage = (int)data.WeaponStats[weapon, 0, player.weaponInventory[weaponSlot, 1]];
+                damage = (int)Mathf.Round(damage + Random.Range(data.WeaponStats[weapon, 0, player.weaponInventory[weaponSlot, 1]] * 0.1f, data.WeaponStats[weapon, 0, player.weaponInventory[weaponSlot, 1]] * -0.1f));
+            }
+            else
+            {
+                Debug.Log(weapon);
+                weapon = weapon - data.names.Length;
+                Debug.Log(weapon);
+                damage = (int)data.miscDamageTypes[weapon];
+                damage = (int)Mathf.Round(damage + Random.Range(data.miscDamageTypes[weapon] * 0.1f, data.miscDamageTypes[weapon] * -0.1f));
+            }
+            health = logic.DealDamage(health, damage, new Vector3(transform.position.x + 0.4f, transform.position.y + 2.2f, -4));
         }
     }
 }

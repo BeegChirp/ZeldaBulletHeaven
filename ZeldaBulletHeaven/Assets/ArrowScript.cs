@@ -10,23 +10,19 @@ public class ArrowScript : MonoBehaviour
     public Rigidbody2D rb;
     public Vector2 direction;
     public float aimAngle;
-    [SerializeField] float bulletForce = 0.15f;
+    public float bulletForce;
     public float lifespan;
-    public int startup;
     private int hitCount = 0;
     private int maxHitCount = 3;
     public int ID;
     void Start()
     {
         lifespan = 200;
-        startup = 25;
+        bulletForce = 100;
         ID = 1;
         playerPos = GameObject.FindGameObjectWithTag("Play Boi").GetComponent<Transform>();
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
         auto = GameObject.FindGameObjectWithTag("Auto").GetComponent<AutoScript>();
-        //rb = GameObject.FindGameObjectWithTag("Arrow").GetComponent<Rigidbody2D>();
-        //transform.rotation = logic.aim(transform.position);
-        //aimAngle = logic.angle;
         direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position; //find where the mouse is compared to the center of the screen
         direction.Normalize();
         rb.AddForce(direction * bulletForce, ForceMode2D.Impulse); //send arrow in the direction of the mouse

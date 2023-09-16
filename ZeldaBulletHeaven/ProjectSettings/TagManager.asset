@@ -13,6 +13,7 @@ TagManager:
   - Damage Number
   - Sword
   - Arrow
+  - Beam
   layers:
   - Default
   - TransparentFX

@@ -73,7 +73,6 @@ public class PlayerScript : MonoBehaviour
     }
     void Update()
     {
-        //moveDirection = playerMovement.ReadValue<Vector2>();
         if (health <= 0) //if player dies
         {
             health = 0; //no negative health
@@ -91,15 +90,15 @@ public class PlayerScript : MonoBehaviour
                 sprite.flipX = false;
             }
         }
+        hpDisplay.text = "Health: " + health.ToString();
         if (xpProgress >= 10 && health > 0)
         {
             currentLevel++;
-            xpProgress = 0;
+            xpProgress -= 10;
             levelCounter.text = "Level: " + (currentLevel + 1).ToString();
             levelUpScreen.SetActive(true);
             lvlUp.LevelUp();
         }
-        hpDisplay.text = "Health: " + health.ToString();
         if (hellMode)
         {
             spawner.scaledTimer = 5;
@@ -116,12 +115,15 @@ public class PlayerScript : MonoBehaviour
             animator.SetFloat("SpeedX", moveDirection.x);
             animator.SetFloat("SpeedY", moveDirection.y);
         }
-
         if (iFrames > 0)
         {
             iFrames--;
         }
-
+        /*if (xpOverflow >= 10)
+        {
+            xpOverflow -= 10;
+            xpProgress += 10;
+        }*/
         if (xpOverflow > 0)
         {
             xpOverflow--;

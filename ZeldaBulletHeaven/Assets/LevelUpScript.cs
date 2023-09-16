@@ -114,7 +114,6 @@ public class LevelUpScript : MonoBehaviour
             }
         }
         levelUpCanvasGroup.alpha = 1;
-
     }
     public void ButtonText(int i)
     {

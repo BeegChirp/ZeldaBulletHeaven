@@ -36,17 +36,10 @@ public class LogicScript : MonoBehaviour
         Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         return rotation;
     }
-    public float DealDamage(float health, int weapon, Vector3 enemyLocation)
+    public float DealDamage(float health, int damage, Vector3 enemyLocation)
     {
-        int weaponSlot = -1;
         bool crit = Random.Range(0, 100) < player.criticalChance;
-        for (int a = 0; a < (player.weaponInventory.Length / 2); a++) //look through weapon inventory
-        {
-            if (weapon == player.weaponInventory[a, 0]) weaponSlot = a;
-        }
-        int damage = (int)data.WeaponStats[weapon, 0, player.weaponInventory[weaponSlot, 1]];
         damage = (int)(damage * player.attack);
-        damage = (int)Mathf.Round(damage + Random.Range(data.WeaponStats[weapon, 0, player.weaponInventory[weaponSlot, 1]] * 0.1f, data.WeaponStats[weapon, 0, player.weaponInventory[weaponSlot, 1]] * -0.1f));
         if (crit) damage = (int)Mathf.Round(damage * player.criticalDamageMult);
         health -= damage;
         SpawnDamageNumber(damage, enemyLocation, crit, false); //get the damage ammount
@@ -62,11 +55,11 @@ public class LogicScript : MonoBehaviour
         gameOverScreen.SetActive(true);
         fadeIn = true;
     }
-    public int GetWeaponID(string id)
+    public int GetCollisionID(string id)
     {
-        //Debug.Log(id);
         if (id == "Sword") return 0;
         if (id == "Arrow") return 1;
+        if (id == "Beam") return 51;
         else return -1;
     }
     public void KillCounter()
