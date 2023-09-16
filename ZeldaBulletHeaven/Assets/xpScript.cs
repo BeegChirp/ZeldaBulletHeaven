@@ -7,13 +7,20 @@ public class xpScript : MonoBehaviour
     public PlayerScript player;
     public Transform playerPos;
     public LogicScript logic;
+    public Rigidbody2D rb;
+    public DataBase data;
+    public SpriteRenderer sprite;
+    public Sprite sprite0, sprite10, sprite50, sprite200;
+    private Sprite[] Sprites;
+    public GameObject[] spawnedXP;
+    private List<GameObject> nearbyXP = new List<GameObject>();
+    private bool pickedUp = false;
+    public int level;
+    float moveSpeed;
+    Vector3 direction;
     Vector2 playerXY;
     Vector2 xpXY;
-    private bool pickedUp = false;
-    float moveSpeed;
-    private Vector3 direction;
     Vector2 moveDirection;
-    public Rigidbody2D rb;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -23,6 +30,9 @@ public class xpScript : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Play Boi").GetComponent<PlayerScript>();
         playerPos = GameObject.FindGameObjectWithTag("Play Boi").GetComponent<Transform>();
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
+        data = GameObject.FindGameObjectWithTag("Data").GetComponent<DataBase>();
+        level = 0;
+        Sprites = new Sprite[4] { sprite0, sprite10, sprite50, sprite200 };
         moveSpeed = (player.moveSpeed * -1.4f); //start with negative speed to move away from the player before being picked up
         direction = Vector3.zero;
     }
@@ -30,6 +40,30 @@ public class xpScript : MonoBehaviour
     {
         playerXY = new Vector2(playerPos.position.x, playerPos.position.y);
         xpXY = new Vector2(transform.position.x, transform.position.y);
+        spawnedXP = GameObject.FindGameObjectsWithTag(gameObject.tag);
+        if (data.xpArray[level, 1] != -1)
+        {
+            for (int a = 0; a < spawnedXP.Length; a++)//make a list of nearby xp of the same level as the current xp
+            {
+                if (Vector3.Distance(transform.position, spawnedXP[a].transform.position) <= 5 && gameObject.tag == spawnedXP[a].tag)
+                {
+                    nearbyXP.Add(spawnedXP[a]);
+                }
+            }
+            if (nearbyXP.Count >= data.xpArray[level, 1])
+            {
+                //delete the old small xp's
+                for (int b = data.xpArray[level, 1]; b >= 0; b--)
+                {
+                    Destroy(nearbyXP[b]);
+                }
+                //update the level & tag of current xp
+                level++;
+                gameObject.tag = data.xpLevels[level];
+            }
+            nearbyXP.Clear();
+        }
+
         if (Vector2.Distance(playerXY, xpXY) <= player.pickupRange)
         {
             pickedUp = true;
@@ -40,6 +74,7 @@ public class xpScript : MonoBehaviour
             if (moveSpeed > 0) direction = (playerPos.position - transform.position).normalized; //adjust direction toward the player when speed is positive to collide with player
             moveDirection = direction;
         }
+        sprite.sprite = Sprites[level];
     }
     public void FixedUpdate()
     {
@@ -51,7 +86,7 @@ public class xpScript : MonoBehaviour
                 moveSpeed += (moveSpeed * 0.022f); //increase speed faster until speed is positive
             }
             moveSpeed += player.moveSpeed * 0.06f; //increase speed based on player's speed
-            if(moveSpeed > 100)
+            if (moveSpeed > 100)
             {
                 moveSpeed = 100;
             }
@@ -63,10 +98,11 @@ public class xpScript : MonoBehaviour
         {
             if (moveSpeed > 0)
             {
-                player.xpProgress++; //give xp
+                player.xpProgress += data.xpArray[level, 0]; //give xp
                 Destroy(gameObject);
             }
         }
     }
 }
+
 

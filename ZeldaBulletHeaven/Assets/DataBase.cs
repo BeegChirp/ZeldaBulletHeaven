@@ -44,6 +44,14 @@ public class DataBase : MonoBehaviour
     {
         9
     };
+    public readonly int[,] xpArray = new int[4, 2]
+    {
+        { 1, 9 }, { 10, 4 }, { 50, 3}, {200, -1 }
+    };//xpValue, xpRequiredForLvlUp
+    public readonly string[] xpLevels = new string[4]
+    {
+        "XP1", "XP10", "XP50", "XP200"
+    };
     void Start()
     {
         names = new string[51]
