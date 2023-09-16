@@ -10,6 +10,7 @@ public class EnemyScript : MonoBehaviour
     Transform target;
     public LogicScript logic;
     public PlayerScript player;
+    public devScript dev;
     public GameObject XP;
     public DataBase data;
     public SpriteRenderer sprite;
@@ -23,9 +24,9 @@ public class EnemyScript : MonoBehaviour
         target = GameObject.FindGameObjectWithTag("Play Boi").transform;
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
         data = GameObject.FindGameObjectWithTag("Data").GetComponent<DataBase>();
+        dev = GameObject.FindGameObjectWithTag("Dev").GetComponent<devScript>();
         moveSpeed = 2;
     }
-
     public void Update()
     {
         if (target)
@@ -49,7 +50,7 @@ public class EnemyScript : MonoBehaviour
             Destroy(gameObject);
             logic.KillCounter();
         }
-        if (player.hellMode)
+        if (dev.hellMode)
         {
             moveSpeed = 20;
         }

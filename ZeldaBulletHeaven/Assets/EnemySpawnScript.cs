@@ -8,6 +8,7 @@ public class EnemySpawnScript : MonoBehaviour
     public PlayerScript player;
     public Transform playerPos;
     public GameObject darknut;
+    public devScript dev;
     public float spawnTimer = 50;
     public float offScreenX = 360;
     public float offScreenY = 225;
@@ -24,6 +25,7 @@ public class EnemySpawnScript : MonoBehaviour
         scaledTimer = 50;
         offScreenX = 45;
         offScreenY = 25;
+        dev = GameObject.FindGameObjectWithTag("Dev").GetComponent<devScript>();
     }
     private void Update()
     {
@@ -32,6 +34,14 @@ public class EnemySpawnScript : MonoBehaviour
         offScreen[1] = new Vector3(playerPos.position.x + Random.Range(-offScreenX, offScreenX), playerPos.position.y - offScreenY, 0.7f);
         offScreen[2] = new Vector3(playerPos.position.x - offScreenX, playerPos.position.y + Random.Range(-offScreenY, offScreenY), 0.7f);
         offScreen[3] = new Vector3(playerPos.position.x + offScreenX, playerPos.position.y + Random.Range(-offScreenY, offScreenY), 0.7f);
+        if (dev.hellMode)
+        {
+            scaledTimer = 5;
+        }
+        else
+        {
+            scaledTimer = 50;
+        }
         //Debug.Log(offScreen[0] + " " + offScreen[1] + " " + offScreen[2] + " " + offScreen[3]);
     }
     private void FixedUpdate()

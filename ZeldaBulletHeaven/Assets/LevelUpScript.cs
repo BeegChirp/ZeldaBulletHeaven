@@ -13,6 +13,7 @@ public class LevelUpScript : MonoBehaviour
     public TextMeshProUGUI button2Text;
     public TextMeshProUGUI button3Text;
     public TextMeshProUGUI button4Text;
+    public TextMeshProUGUI levelCounter;
     bool maxLevel = false;
     int[] buttons = new int[4];
     string[] buttonsDisplay = new string[4];
@@ -42,6 +43,9 @@ public class LevelUpScript : MonoBehaviour
     public void LevelUp()
     {
         Time.timeScale = 0f; //pause
+        player.currentLevel++;
+        levelCounter.text = "Level: " + (player.currentLevel + 1).ToString();
+        levelUpScreen.SetActive(true);
         for (int x = 0; x < buttons.Length; x++)
         {
             buttons[x] = -1;
@@ -213,6 +217,8 @@ public class LevelUpScript : MonoBehaviour
         }
         levelUpCanvasGroup.alpha = 0;
         levelUpScreen.SetActive(false);
+        player.xpOverflow += player.xpProgress-10;
+        player.xpProgress = 0;
         Time.timeScale = 1f;
     }
     public void Option1Chosen()

@@ -15,19 +15,17 @@ public class PlayerScript : MonoBehaviour
     public EnemySpawnScript spawner;
     public SpriteRenderer sprite;
     public AutoScript auto;
-    public bool hellMode = false;
     public GameObject XP;
     public MenuScript menu;
     public Animator animator;
-    public TextMeshProUGUI hpDisplay, levelCounter;
+    public TextMeshProUGUI hpDisplay;
     public PlayerControls playerControls;
     public int iFrames = 0;
     public string[] skillNames;
     public int[,] weaponInventory, itemInventory;
     public int[] skills;
     public float health, maxHealth, attack, moveSpeed, moveSpeedMult, criticalChance, criticalDamageMult, haste, pickupRange, luck, size;
-    public int xpProgress, currentLevel;
-    public int xpOverflow;
+    public int xpProgress, xpOverflow, currentLevel;
     Vector2 moveDirection = Vector2.zero;
     /*private void OnEnable()
     {
@@ -91,22 +89,6 @@ public class PlayerScript : MonoBehaviour
             }
         }
         hpDisplay.text = "Health: " + health.ToString();
-        if (xpProgress >= 10 && health > 0)
-        {
-            currentLevel++;
-            xpProgress -= 10;
-            levelCounter.text = "Level: " + (currentLevel + 1).ToString();
-            levelUpScreen.SetActive(true);
-            lvlUp.LevelUp();
-        }
-        if (hellMode)
-        {
-            spawner.scaledTimer = 5;
-        }
-        else
-        {
-            spawner.scaledTimer = 50;
-        }
     }
     private void FixedUpdate()
     {
@@ -115,36 +97,29 @@ public class PlayerScript : MonoBehaviour
             animator.SetFloat("SpeedX", moveDirection.x);
             animator.SetFloat("SpeedY", moveDirection.y);
         }
+        if (xpOverflow > 0 && health > 0)
+        {
+            for (int i = 5; i >= 1; i--)
+            {
+
+                if (xpOverflow % i == 0)
+                {
+                    xpOverflow -= i;
+                    xpProgress += i;
+                }
+            }
+        }
+        if (xpProgress >= 10)
+        {
+            lvlUp.LevelUp();
+        }
         if (iFrames > 0)
         {
             iFrames--;
         }
-        /*if (xpOverflow >= 10)
-        {
-            xpOverflow -= 10;
-            xpProgress += 10;
-        }*/
-        if (xpOverflow > 0)
-        {
-            xpOverflow--;
-            xpProgress++;
-        }
     }
-
     private void OnMove(InputValue inputValue)
     {
         rb.velocity = inputValue.Get<Vector2>() * moveSpeed;
-    }
-
-    private void OnSpawnXP()
-    {
-        for (int xp = 0; xp < 100; xp++)
-        {
-            Instantiate(XP, transform);
-        }
-    }
-    private void OnHellMode()
-    {
-        hellMode =! hellMode;
     }
 }

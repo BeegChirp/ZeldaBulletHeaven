@@ -14,6 +14,7 @@ TagManager:
   - Sword
   - Arrow
   - Beam
+  - Dev
   layers:
   - Default
   - TransparentFX
