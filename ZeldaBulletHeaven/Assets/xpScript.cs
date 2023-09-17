@@ -41,29 +41,6 @@ public class xpScript : MonoBehaviour
         playerXY = new Vector2(playerPos.position.x, playerPos.position.y);
         xpXY = new Vector2(transform.position.x, transform.position.y);
         spawnedXP = GameObject.FindGameObjectsWithTag(gameObject.tag);
-        if (data.xpArray[level, 1] != -1)
-        {
-            for (int a = 0; a < spawnedXP.Length; a++)//make a list of nearby xp of the same level as the current xp
-            {
-                if (Vector3.Distance(transform.position, spawnedXP[a].transform.position) <= 5 && gameObject.tag == spawnedXP[a].tag)
-                {
-                    nearbyXP.Add(spawnedXP[a]);
-                }
-            }
-            if (nearbyXP.Count >= data.xpArray[level, 1])
-            {
-                //delete the old small xp's
-                for (int b = data.xpArray[level, 1]; b >= 0; b--)
-                {
-                    Destroy(nearbyXP[b]);
-                }
-                //update the level & tag of current xp
-                level++;
-                gameObject.tag = data.xpLevels[level];
-            }
-            nearbyXP.Clear();
-        }
-
         if (Vector2.Distance(playerXY, xpXY) <= player.pickupRange)
         {
             pickedUp = true;
@@ -73,6 +50,29 @@ public class xpScript : MonoBehaviour
         {
             if (moveSpeed > 0) direction = (playerPos.position - transform.position).normalized; //adjust direction toward the player when speed is positive to collide with player
             moveDirection = direction;
+        }
+        else if (data.xpArray[level, 1] != -1)
+        {
+            for (int a = 0; a < spawnedXP.Length; a++)//make a list of nearby xp of the same level as the current xp
+            {
+                if (gameObject != spawnedXP[a] && Vector3.Distance(transform.position, spawnedXP[a].transform.position) <= 5 && gameObject.tag == spawnedXP[a].tag)
+                {
+                    nearbyXP.Add(spawnedXP[a]);
+                    //spawnedXP[a].tag = "XP";
+                }
+            }
+            if (nearbyXP.Count >= data.xpArray[level, 1])
+            {
+                //delete the old small xp's
+                for (int b = data.xpArray[level, 1] - 1; b >= 0; b--)
+                {
+                    Destroy(nearbyXP[b]);
+                }
+                //update the level & tag of current xp
+                level++;
+                gameObject.tag = data.xpLevels[level];
+            }
+            nearbyXP.Clear();
         }
         sprite.sprite = Sprites[level];
     }

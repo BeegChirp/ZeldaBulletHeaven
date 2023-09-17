@@ -9,6 +9,7 @@ public class devScript : MonoBehaviour
     public InputAction devCommands;
     public GameObject XP;
     public GameObject player;
+    int xpSpawn;
     public bool hellMode = false;
     private void OnEnable()
     {
@@ -22,12 +23,17 @@ public class devScript : MonoBehaviour
     {
         playerControls = new PlayerControls();
     }
-    private void OnSpawnXP()
+    private void Update()
     {
-        for (int xp = 0; xp < 100; xp++)
+        if (xpSpawn > 0)
         {
             Instantiate(XP, player.transform);
+            xpSpawn--;
         }
+    }
+    private void OnSpawnXP()
+    {
+        xpSpawn = 100;
     }
     private void OnHellMode()
     {
